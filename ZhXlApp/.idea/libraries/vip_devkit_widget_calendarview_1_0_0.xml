@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="vip.devkit:widget.calendarview-1.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/widget.calendarview-1.0.0.aar/b4fd2563a3434a1d15bbf13d4f27c526/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/widget.calendarview-1.0.0.aar/b4fd2563a3434a1d15bbf13d4f27c526/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/vip.devkit/widget.calendarview/1.0.0/f916b85b95065faf91bd33c9c4499ae28b82019f/widget.calendarview-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

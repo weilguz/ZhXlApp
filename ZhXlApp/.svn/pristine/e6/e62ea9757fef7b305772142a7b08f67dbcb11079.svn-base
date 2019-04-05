@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="AliyunVodPlayer:@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/AliyunVodPlayer/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/AliyunVodPlayer/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

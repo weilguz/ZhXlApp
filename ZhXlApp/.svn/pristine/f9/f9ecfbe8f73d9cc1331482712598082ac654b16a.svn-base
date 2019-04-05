@@ -1,0 +1,180 @@
+/**
+ * ****************************** Copyright (c)*********************************\
+ * *
+ * *                 (c) Copyright 2017, DevKit.vip, china, qd. sd
+ * *                          All Rights Reserved
+ * *
+ * *                           By(K)
+ * *
+ * *-----------------------------------版本信息------------------------------------
+ * * 版    本: V0.1
+ * *
+ * *------------------------------------------------------------------------------
+ * *******************************End of Head************************************\
+ */
+package com.idyoga.yoga.activity;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.adapter.GuidePageAdapter;
+import com.idyoga.yoga.adapter.HomeFrPagerAdapter;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.base.BaseActivity;
+import com.idyoga.yoga.common.adapter.CommonAdapter;
+import com.idyoga.yoga.common.adapter.ViewHolder;
+import com.idyoga.yoga.common.http.type2.ICommonViewUi;
+import com.idyoga.yoga.common.http.type2.presenter.ICommonRequestPresenter;
+import com.idyoga.yoga.common.http.type2.presenter.impl.CommonRequestPresenterImpl;
+import com.idyoga.yoga.fragment.CourseFragment;
+import com.idyoga.yoga.fragment.MineFragment;
+import com.idyoga.yoga.fragment.VideoFragment;
+import com.idyoga.yoga.view.CustomViewPager;
+import com.idyoga.yoga.view.ItemListView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import vip.devkit.library.Logcat;
+import vip.devkit.view.common.tab.AdvancedPagerSlidingTabStrip;
+
+/**
+ * 文 件 名: TestActivity
+ * 创 建 人: By k
+ * 创建日期: 2018/3/25 15:53
+ * 邮   箱:  vip@devkit.vip
+ * 博   客: www.devkit.vip
+ * 修改时间：
+ * 修改备注：
+ */
+public class TestActivity extends BaseActivity {
+
+    @BindView(R.id.lv_list)
+    ItemListView mLvList;
+    @BindView(R.id.tab_view)
+    AdvancedPagerSlidingTabStrip mTabView;
+    @BindView(R.id.vp_view)
+    CustomViewPager mVpView;
+    private List<String> mTabList = new ArrayList<>();
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
+
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.a_test;
+    }
+
+
+    @Override
+    protected void initView() {
+        List<String> list = new ArrayList();
+        for (int i = 0; i < 10; i++) {
+            list.add("");
+        }
+        mLvList.setAdapter(new CommonAdapter<String>(this, list, R.layout.item_video_course_list) {
+            @Override
+            public void convert(ViewHolder holder, String s, int position) {
+
+            }
+        });
+        mTabList.add("a");
+        mTabList.add("v");
+        VideoFragment videoFragment = new VideoFragment();
+        CourseFragment testFragment3 = new CourseFragment();
+        mFragments.add(videoFragment);
+        mFragments.add(testFragment3);
+        mVpView.setAdapter(new testAdapter(getSupportFragmentManager(), mTabList, mFragments));
+        mTabView.setViewPager(mVpView);
+        mTabView.setSelectItem(0);
+
+
+
+
+    }
+
+    @Override
+    protected void setListener() {
+        mVpView.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mVpView.resetHeight(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    class testAdapter extends FragmentPagerAdapter {
+        private List<String> mStringList;
+        private List<Fragment> mFragments;
+        FragmentManager fm;
+
+        public testAdapter(FragmentManager fm, List<String> mStringList, ArrayList<Fragment> mFragments) {
+            super(fm);
+            this.fm = fm;
+            this.mStringList = mStringList;
+            this.mFragments = mFragments;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mStringList.get(position);
+        }
+
+        /**
+         * @return 返回页面的个数
+         */
+        @Override
+        public int getCount() {
+            if (mStringList != null) {
+                return mStringList.size();
+            }
+            return 0;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            FragmentTransaction transaction = fm.beginTransaction();
+            for (int i = 0; i < mFragments.size(); i++) {
+                if (i == position) {
+                    mFragments.get(position);
+                } else {
+                    transaction.show(mFragments.get(i));
+                }
+            }
+            transaction.commit();
+            return mFragments.get(position);
+        }
+    }
+
+}

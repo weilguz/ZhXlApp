@@ -1,0 +1,517 @@
+package com.idyoga.yoga.fragment;
+
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.alibaba.android.vlayout.layout.StaggeredGridLayoutHelper;
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.activity.home.SubjectListActivity;
+import com.idyoga.yoga.activity.loading.SetCityActivity;
+import com.idyoga.yoga.activity.search.SearchLeadActivity;
+import com.idyoga.yoga.activity.web.YogaWebActivity;
+import com.idyoga.yoga.adapter.base.BaseDelegateAdapter;
+import com.idyoga.yoga.base.BaseFragment;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.comm.AppContext;
+import com.idyoga.yoga.listener.OnItemClickListener;
+import com.idyoga.yoga.model.ResultBean;
+import com.idyoga.yoga.model.VideoCourseV2Bean;
+import com.idyoga.yoga.utils.BannerGlideImageLoader;
+import com.idyoga.yoga.utils.YogaViewUtil;
+import com.idyoga.yoga.view.YogaLayoutManager;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Call;
+import vip.devkit.library.DensityUtil;
+import vip.devkit.library.ListUtil;
+import vip.devkit.library.Logcat;
+import vip.devkit.library.SharedPreferencesUtils;
+import vip.devkit.library.StringUtil;
+import vip.devkit.view.common.banner.BannerConfig;
+import vip.devkit.view.common.banner.BannerV;
+import vip.devkit.view.common.banner.listener.OnBannerListener;
+
+/**
+ * 作者 by K
+ * 时间：on 2018/2/20
+ * 邮箱 by  vip@devkit.vip
+ * <p/>
+ * 类用途：
+ * 最后修改：
+ */
+public class VideoFragment extends BaseFragment {
+    @BindView(R.id.iv_address)
+    ImageView mIvAddress;
+    @BindView(R.id.tv_address)
+    TextView mTvAddress;
+    @BindView(R.id.ll_address)
+    LinearLayout mLlAddress;
+    @BindView(R.id.et_search)
+    EditText mEtSearch;
+    @BindView(R.id.iv_search)
+    ImageView mIvSearch;
+    @BindView(R.id.ll_search_title)
+    RelativeLayout mLlSearchTitle;
+    @BindView(R.id.rv_list)
+    RecyclerView mRvList;
+    @BindView(R.id.srl_Refresh)
+    SwipeRefreshLayout mSrlRefresh;
+    private VirtualLayoutManager layoutManager;
+    private List<DelegateAdapter.Adapter> mAdapters;
+    private DelegateAdapter delegateAdapter;
+    private BaseDelegateAdapter mBannerAdapter, mType0Adapter, mType1Adapter, mType2Adapter, mType3Adapter;
+    private BaseDelegateAdapter mType0Title, mType1Title, mType2Title, mType3Title;
+
+    private List<String> mBvList = new ArrayList<>();
+    private String cityName;
+    private VideoCourseV2Bean mCourseBean;
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(mLlSearchTitle)
+                .keyboardEnable(true)
+                .flymeOSStatusBarFontColor("#333333")
+                .init();
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        Logcat.i("Item:" + getUserVisibleHint());
+        cityName = (String) SharedPreferencesUtils.getSP(AppContext.getInstance(), "cityName", "");
+        getData();
+    }
+
+    @Override
+    protected YogaLayoutManager initLayoutManager() {
+        return YogaLayoutManager.wrap(mRvList);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.fragment_course;
+    }
+
+    @Override
+    protected void initView(View view) {
+        super.initView(view);
+        mLayoutManager.showLoading();
+        initRvView();
+        mTvAddress.setText(StringUtil.isEmpty(cityName) ? "" : cityName);
+    }
+
+    @Override
+    protected void onFirstVisible() {
+        super.onFirstVisible();
+        if (mLayoutManager!=null) {
+            mLayoutManager.showLoading();
+        }
+    }
+
+    private void initRvView() {
+        mAdapters = new LinkedList<>();
+        layoutManager = new VirtualLayoutManager(mActivity);
+        mRvList.setLayoutManager(layoutManager);
+        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+//        mRvList.setRecycledViewPool(viewPool);
+        viewPool.setMaxRecycledViews(1, 20);
+        viewPool.setMaxRecycledViews(2, 20);
+        viewPool.setMaxRecycledViews(3, 20);
+        viewPool.setMaxRecycledViews(4, 20);
+        viewPool.setMaxRecycledViews(5, 20);
+        delegateAdapter = new DelegateAdapter(layoutManager, true);
+        mRvList.setAdapter(delegateAdapter);
+        initAllTypeView();
+        delegateAdapter.setAdapters(mAdapters);
+        mRvList.setAdapter(delegateAdapter);
+    }
+
+    private void initAllTypeView() {
+        initBannerView();
+        initTypeHeadA();
+        initTypeA();
+        initTypeHeadB();
+        initTypeB();
+        initTypeHeadC();
+        initTypeC();
+        initTypeHeadD();
+        initTypeD();
+    }
+
+    private void initBannerView() {
+        mBannerAdapter = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper(), R.layout.layout_banner, 0, 0) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                if (ListUtil.isEmpty(mBvList)) {
+                    return;
+                }
+                BannerV mBanner = holder.getView(R.id.bv_view);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mBanner.getLayoutParams();
+                layoutParams.height = DensityUtil.dp2px(mActivity, 140);
+                mBanner.setLayoutParams(layoutParams);
+                mBanner.setBannerStyle(1);
+                mBanner.setImageLoader(new BannerGlideImageLoader());
+                mBanner.setImages(mBvList);
+                mBanner.isAutoPlay(true);
+                mBanner.setDelayTime(3000);
+                mBanner.setIndicatorGravity(BannerConfig.CENTER);
+                mBanner.start();
+                mBanner.setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("getUrl", mListBeans.get(position).getUrl() + "");
+                        startActivityWithExtras(YogaWebActivity.class, bundle);
+                    }
+                });
+            }
+        };
+        mAdapters.add(mBannerAdapter);
+    }
+
+    private void initTypeHeadA() {
+        mType0Title = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper(), R.layout.item_video_type_head, 0, 6) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_head_name, "名馆系列")
+                        .setText(R.id.tv_all, "查看更多系列").setVisible(R.id.tv_all, false);
+            }
+        };
+        mAdapters.add(mType0Title);
+    }
+
+    private void initTypeA() {
+        StaggeredGridLayoutHelper layoutHelper = new StaggeredGridLayoutHelper(2);
+        layoutHelper.setLane(2);
+//        layoutHelper.setGap(YogaViewUtil.dp2px(mActivity,1));
+        layoutHelper.setHGap(YogaViewUtil.dp2px(mActivity, 1));
+//        OnePlusNLayoutHelper layoutHelper = new OnePlusNLayoutHelper(3);
+//        layoutHelper.setColWeights(new float[]{60, 40, 40});
+        mType0Adapter = new BaseDelegateAdapter(mActivity, layoutHelper, R.layout.item_video_type_0, 0, 1) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+                if (position == 0) {
+                    layoutParams.height = YogaViewUtil.dp2px(mActivity, 162);
+                    holder.getView(R.id.rl_layout_0).setVisibility(View.VISIBLE);
+                    holder.getView(R.id.rl_layout_1).setVisibility(View.GONE);
+                    Glide.with(mActivity).load(mType0List.get(position).getImage_url()).placeholder(R.drawable.img_course02)
+                            .error(R.drawable.img_course02).into((ImageView) holder.getView(R.id.iv_img));
+                } else {
+                    if (position == 2) {
+                        holder.itemView.setPadding(0, YogaViewUtil.dp2px(mActivity, 1), 0, 0);
+                    }
+                    layoutParams.height = YogaViewUtil.dp2px(mActivity, 80);
+                    holder.getView(R.id.rl_layout_0).setVisibility(View.GONE);
+                    holder.getView(R.id.rl_layout_1).setVisibility(View.VISIBLE);
+                    Glide.with(mActivity).load(mType0List.get(position).getImage_url()).placeholder(R.drawable.img_course02)
+                            .error(R.drawable.img_course02).into((ImageView) holder.getView(R.id.iv_img_2));
+                }
+                holder.itemView.setLayoutParams(layoutParams);
+                holder.setText(R.id.tv_title, mType0List.get(position).getTitle())
+                        .setText(R.id.tv_title_2, mType0List.get(position).getTitle())
+                        .setText(R.id.tv_number, mType0List.get(position).getNumber() + "人已学习");
+            }
+        };
+        mAdapters.add(mType0Adapter);
+    }
+
+    private void initTypeHeadB() {
+        mType1Title = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper(), R.layout.item_video_type_head, 0, 6) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_head_name, "名师系列").setText(R.id.tv_all, "查看更多系列").setVisible(R.id.tv_all, false);
+            }
+        };
+        mAdapters.add(mType1Title);
+    }
+
+    private void initTypeB() {
+        ColumnLayoutHelper layoutHelper = new ColumnLayoutHelper();
+        layoutHelper.setWeights(new float[]{40, 15, 15, 15, 15});
+        mType1Adapter = new BaseDelegateAdapter(mActivity, layoutHelper, R.layout.item_video_type_1, 0, 2) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                Glide.with(mActivity).load(mType1List.get(position).getImage_url()).placeholder(R.drawable.img_course02)
+                        .error(R.drawable.img_course02).into((ImageView) holder.getView(R.id.iv_img));
+                if (position == 0) {
+                    holder.setText(R.id.tv_title, mType1List.get(position).getTitle())
+                            .setVisible(R.id.tv_title, true)
+                            .setText(R.id.tv_number, mType1List.get(position).getNumber() + "人已学习");
+                    holder.setVisible(R.id.tv_tutor_name, false);
+                } else {
+                    holder.setVisible(R.id.tv_title, false)
+                            .setVisible(R.id.tv_number, false)
+                            .setVisible(R.id.tv_tutor_name, true)
+                            .setText(R.id.tv_tutor_name, mType1List.get(position).getTutor_name());
+                }
+            }
+        };
+        mAdapters.add(mType1Adapter);
+    }
+
+    private void initTypeHeadC() {
+        mType2Title = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper(), R.layout.item_video_type_head, 0, 6) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_head_name, "名师系列").setText(R.id.tv_all, "查看更多系列").setVisible(R.id.tv_all, false);
+            }
+        };
+        mAdapters.add(mType2Title);
+    }
+
+    private void initTypeC() {
+        GridLayoutHelper layoutHelper = new GridLayoutHelper(3);
+        layoutHelper.setHGap(4);
+        layoutHelper.setVGap(4);
+        layoutHelper.setAutoExpand(false);
+        layoutHelper.setSpanSizeLookup(new GridLayoutHelper.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == getStartPosition()) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        mType2Adapter = new BaseDelegateAdapter(mActivity, layoutHelper, R.layout.item_video_type_2, 0, 4) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                ViewGroup.LayoutParams layoutParams = holder.getView(R.id.rl_layout).getLayoutParams();
+                layoutParams.height = YogaViewUtil.getScreenWidth(mActivity) / 3 - 6;
+                layoutParams.width = holder.getView(R.id.rl_layout).getWidth();
+                holder.getView(R.id.rl_layout).setLayoutParams(layoutParams);
+                Glide.with(mActivity).load(mType2List.get(position).getImage_url()).placeholder(R.drawable.img_course02)
+                        .error(R.drawable.img_course02).into((ImageView) holder.getView(R.id.iv_img));
+                TextView textView = holder.getView(R.id.tv_number);
+                TextView mTvTitle = holder.getView(R.id.tv_title);
+                mTvTitle.setText(mType2List.get(position).getTitle() + "");
+                if (position == 0) {
+                    mTvTitle.setVisibility(View.VISIBLE);
+                    textView.setText(mType2List.get(position).getNumber() + "人已学习");
+                } else {
+                    mTvTitle.setVisibility(View.GONE);
+                    textView.setText(mType2List.get(position).getTutor_name() + "");
+                    textView.setTextSize(14f);
+                }
+            }
+        };
+        mAdapters.add(mType2Adapter);
+    }
+
+    private void initTypeHeadD() {
+        mType3Title = new BaseDelegateAdapter(mActivity, new LinearLayoutHelper(), R.layout.item_video_type_head, 0, 6) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_head_name, "热门活动").setText(R.id.tv_all, "查看更多活动").setVisible(R.id.tv_all, false);
+            }
+        };
+        mAdapters.add(mType3Title);
+    }
+
+    private void initTypeD() {
+        LinearLayoutHelper layoutHelper = new LinearLayoutHelper(10);
+        mType3Adapter = new BaseDelegateAdapter(mActivity, layoutHelper, R.layout.item_video_type_3, 0, 5) {
+            @Override
+            public void onBindViewHolder(BaseViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.setText(R.id.tv_title, mType3List.get(position).getTitle())
+                        .setText(R.id.tv_number, mType3List.get(position).getNumber() + "人已学习");
+                Glide.with(mActivity).load(mType2List.get(position).getImage_url()).placeholder(R.drawable.img_course02)
+                        .error(R.drawable.img_course02).into((ImageView) holder.getView(R.id.iv_img));
+            }
+        };
+        mAdapters.add(mType3Adapter);
+    }
+
+    @Override
+    protected void setListener() {
+        super.setListener();
+        mSrlRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                mSrlRefresh.setRefreshing(false);
+            }
+        });
+        mType0Adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int type, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("videoId", mType0List.get(position).getId() + "");
+                startActivityWithExtras(SubjectListActivity.class, bundle);
+            }
+        });
+        mType1Adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int type, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("videoId", mType1List.get(position).getId() + "");
+                startActivityWithExtras(SubjectListActivity.class, bundle);
+            }
+        });
+        mType2Adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int type, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("videoId", mType2List.get(position).getId() + "");
+                startActivityWithExtras(SubjectListActivity.class, bundle);
+            }
+        });
+        mType3Adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int type, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("videoId", mType3List.get(position).getId() + "");
+                startActivityWithExtras(SubjectListActivity.class, bundle);
+            }
+        });
+    }
+
+    @OnClick({R.id.ll_address, R.id.et_search, R.id.iv_search})
+    public void onViewClicked(View view) {
+        Bundle bundle;
+        switch (view.getId()) {
+            case R.id.ll_address:
+                bundle = new Bundle();
+                bundle.putString("fromTag", "other");
+                startActivityWithExtras(SetCityActivity.class, bundle);
+                break;
+            case R.id.et_search:
+                bundle = new Bundle();
+                startActivityWithExtras(SearchLeadActivity.class, bundle);
+                break;
+            case R.id.iv_search:
+                bundle = new Bundle();
+                startActivityWithExtras(SearchLeadActivity.class, bundle);
+                break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getUserVisibleHint()) {
+            String cityName = (String) SharedPreferencesUtils.getSP(mActivity, "cityName", "");
+            if (!StringUtil.isEmpty(cityName)) {
+                mTvAddress.setText(cityName);
+            }
+        }
+    }
+
+    List<VideoCourseV2Bean.VideoListBean.VideoLseeonBean> mType0List = new ArrayList<>();
+    List<VideoCourseV2Bean.VideoListBean.VideoLseeonBean> mType1List = new ArrayList<>();
+    List<VideoCourseV2Bean.VideoListBean.VideoLseeonBean> mType2List = new ArrayList<>();
+    List<VideoCourseV2Bean.VideoListBean.VideoLseeonBean> mType3List = new ArrayList<>();
+    List<VideoCourseV2Bean.BannerListBean> mListBeans = new ArrayList<>();
+
+    private void initViewData(VideoCourseV2Bean courseBean) {
+        mType0List.clear();
+        mType1List.clear();
+        mType2List.clear();
+        mType3List.clear();
+        mBvList.clear();
+        for (int i = 0; i < courseBean.getBannerList().size(); i++) {
+            mBvList.add(courseBean.getBannerList().get(i).getImage());
+        }
+        mListBeans.addAll(courseBean.getBannerList());
+        if (!ListUtil.isEmpty(courseBean.getVideoList())) {
+            for (int i = 0; i < courseBean.getVideoList().size(); i++) {
+                if (courseBean.getVideoList().get(i).getType() == 1) {
+                    mType0List.addAll(courseBean.getVideoList().get(i).getVideoLseeon());
+                } else if (courseBean.getVideoList().get(i).getType() == 2) {
+                    mType1List.addAll(courseBean.getVideoList().get(i).getVideoLseeon());
+                } else if (courseBean.getVideoList().get(i).getType() == 3) {
+                    mType2List.addAll(courseBean.getVideoList().get(i).getVideoLseeon());
+                } else if (courseBean.getVideoList().get(i).getType() == 4) {
+                    mType3List.addAll(courseBean.getVideoList().get(i).getVideoLseeon());
+                }
+            }
+        }
+        Logcat.e("" + mType0List.size() + "/" + mType1List.size() + "/" + mBvList.size());
+        mBannerAdapter.setCount(1);
+        mType0Adapter.setCount(mType0List.size());
+        mType1Adapter.setCount(mType1List.size());
+        mType2Adapter.setCount(mType2List.size());
+        mType3Adapter.setCount(mType3List.size());
+        if (!ListUtil.isEmpty(mType0List)) {
+            mType0Title.setCount(1);
+            mType0Title.notifyDataSetChanged();
+        }
+        if (!ListUtil.isEmpty(mType1List)) {
+            mType1Title.setCount(1);
+            mType1Title.notifyDataSetChanged();
+        }
+        if (!ListUtil.isEmpty(mType2List)) {
+            mType2Title.setCount(1);
+            mType2Title.notifyDataSetChanged();
+        }
+        if (!ListUtil.isEmpty(mType3List)) {
+            mType3Title.setCount(1);
+            mType3Title.notifyDataSetChanged();
+        }
+        mBannerAdapter.notifyDataSetChanged();
+        mType0Adapter.notifyDataSetChanged();
+        mType1Adapter.notifyDataSetChanged();
+        mType2Adapter.notifyDataSetChanged();
+        mType3Adapter.notifyDataSetChanged();
+        mLayoutManager.showContent();
+    }
+
+    public void getData() {
+        Map map = new HashMap();
+        OkHttpUtils.get().url(ApiConstants.Urls.VIDEO_COURSE_LIST_V2).params(map).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                mLayoutManager.showNetError();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+                ResultBean bean = JSON.parseObject(response, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    mCourseBean = JSON.parseObject(bean.getData(), VideoCourseV2Bean.class);
+                    if (mCourseBean != null) {
+                        initViewData(mCourseBean);
+                    }
+                }
+            }
+        });
+    }
+}

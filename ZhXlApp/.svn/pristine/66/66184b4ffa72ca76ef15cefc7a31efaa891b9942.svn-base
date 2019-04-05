@@ -1,0 +1,238 @@
+package com.idyoga.yoga.activity.card;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.adapter.CardPageAdapter;
+import com.idyoga.yoga.adapter.VipCardAdapter;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.base.BaseActivity;
+import com.idyoga.yoga.common.http.type1.HttpClient;
+import com.idyoga.yoga.common.http.type1.HttpResponseHandler;
+import com.idyoga.yoga.model.ResultBean;
+import com.idyoga.yoga.model.VIPCardBean;
+import com.idyoga.yoga.utils.ToastUtil;
+import com.idyoga.yoga.view.YogaLayoutManager;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Request;
+import vip.devkit.library.Logcat;
+import vip.devkit.library.SharedPreferencesUtils;
+import vip.devkit.library.StringUtil;
+import vip.devkit.view.common.tab.AdvancedPagerSlidingTabStrip;
+
+public class MembershipCardActivity extends BaseActivity {
+    @BindView(R.id.tabs)
+    AdvancedPagerSlidingTabStrip mTabs;
+    @BindView(R.id.vp_content)
+    ViewPager mVpContent;
+    @BindView(R.id.ll_title_back)
+    LinearLayout mLlTitleBack;
+    @BindView(R.id.tv_title_text)
+    TextView mTvTitleText;
+    @BindView(R.id.ll_common_layout)
+    LinearLayout mLlCommonLayout;
+    private List<String> mTabList = new ArrayList<>();
+    private List<View> mViewList = new ArrayList<>();
+    private ListView listValid;
+    private ListView listInvalid;
+    private int PageIndexInvalid = 0, PageIndexValid = 0;
+    private String UserId, Token, ShopId;
+    private VipCardAdapter adAdapter1, adAdapter2;
+    private List<VIPCardBean> mValidList = new ArrayList<>();
+    private List<VIPCardBean> mInValidList = new ArrayList<>();
+    private YogaLayoutManager mYogaLayoutManager1, mYogaLayoutManager2;
+
+    private static final int NOT_1 = 1, NOT_2 = 2;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case NOT_1:
+                    adAdapter1.notifyDataSetChanged();
+                    break;
+                case NOT_2:
+                    adAdapter2.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(mLlCommonLayout).statusBarDarkFont(true).init();
+    }
+
+    @Override
+    protected void initData() {
+        UserId = (String) SharedPreferencesUtils.getSP(this, "Mobile", "");
+        Token = (String) SharedPreferencesUtils.getSP(this, "Token", "");
+        ShopId = (String) SharedPreferencesUtils.getSP(this, "shopId", "");
+        getCardDataValid(PageIndexValid++);
+        getCardDataInvalid(PageIndexInvalid++);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.user_activity_vip_card;
+    }
+
+    @Override
+    protected void initView() {
+        mTabList.clear();
+        mViewList.clear();
+        mTvTitleText.setText("我的权益卡");
+        mTabList.add("有效的");
+        mTabList.add("无效的");
+        View viewValid = View.inflate(this, R.layout.user_layout_card, null);
+        View viewInvalid = View.inflate(this, R.layout.user_layout_card, null);
+        mViewList.add(viewValid);
+        mViewList.add(viewInvalid);
+        mVpContent.setAdapter(new CardPageAdapter(mViewList, mTabList));
+        mVpContent.setCurrentItem(0);
+        mTabs.setViewPager(mVpContent);
+        initLayoutView(viewValid, viewInvalid);
+    }
+
+    private void initLayoutView(View view1, View view2) {
+        listValid = (ListView) view1.findViewById(R.id.lv_card_list);
+        listInvalid = (ListView) view2.findViewById(R.id.lv_card_list);
+        mYogaLayoutManager1 = YogaLayoutManager.wrap(listValid);
+        mYogaLayoutManager2 = YogaLayoutManager.wrap(listInvalid);
+        mYogaLayoutManager1.showLoading();
+        mYogaLayoutManager2.showLoading();
+        adAdapter1 = new VipCardAdapter(MembershipCardActivity.this, mValidList, R.layout.item_user_card_1, 1);
+        adAdapter2 = new VipCardAdapter(MembershipCardActivity.this, mInValidList, R.layout.item_user_card_1, 2);
+        listValid.setAdapter(adAdapter1);
+        listInvalid.setAdapter(adAdapter2);
+        adAdapter1.notifyDataSetChanged();
+        adAdapter2.notifyDataSetChanged();
+    }
+
+    private void getCardDataValid(int pageIndexValid) {
+        Map<String, String> map = new HashMap();
+        map.put("token", Token);
+        map.put("status", "0");
+        final String str = map.toString();
+        HttpClient.post(ApiConstants.Urls.USER_CARD_LIST_V2, map, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, String content) {
+                super.onSuccess(statusCode, content);
+                Logcat.i("\n接口地址：" + "" + "\n提交的参数：" + str + "\n" + "返回码：" + statusCode + "\n" + "返回参数：" + content);
+                ResultBean resultBean = JSON.parseObject(content, ResultBean.class);
+                if (resultBean.getCode().equals("1")) {
+                    if (!StringUtil.isEmpty(resultBean.getData())) {
+                        List<VIPCardBean> beanList = JSON.parseArray(resultBean.getData(), VIPCardBean.class);
+                        mValidList.addAll(beanList);
+                        if (mValidList.size() > 0) {
+                            mYogaLayoutManager1.showContent();
+                            Message msg = new Message();
+                            msg.what = NOT_1;
+                            msg.obj = new Bundle();
+                            handler.sendMessage(msg);
+                        } else {
+                            mYogaLayoutManager1.showEmpty();
+                        }
+                    } else {
+                        mYogaLayoutManager1.showEmpty();
+                    }
+                } else {
+                    ToastUtil.showToast(resultBean.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+        });
+    }
+
+    private void getCardDataInvalid(int pageIndexInvalid) {
+        Map<String, String> map = new HashMap();
+        map.put("token", Token);
+        map.put("status", "1");
+        final String str = map.toString();
+        HttpClient.post(ApiConstants.Urls.USER_CARD_LIST_V2, map, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, String content) {
+                super.onSuccess(statusCode, content);
+                Logcat.i("\n接口地址：" + "" + "\n提交的参数：" + str + "\n" + "返回码：" + statusCode + "\n" + "返回参数：" + content);
+                ResultBean resultBean = JSON.parseObject(content, ResultBean.class);
+                if (resultBean.getCode().equals("1")) {
+                    if (!StringUtil.isEmpty(resultBean.getData())) {
+                        List<VIPCardBean> beanList = JSON.parseArray(resultBean.getData(), VIPCardBean.class);
+                        mInValidList.addAll(beanList);
+                        if (mInValidList.size() > 0) {
+                            mYogaLayoutManager2.showContent();
+                            Message msg = new Message();
+                            msg.what = NOT_2;
+                            msg.obj = new Bundle();
+                            handler.sendMessage(msg);
+                        } else {
+                            mYogaLayoutManager2.showEmpty();
+                        }
+                    } else {
+                        mYogaLayoutManager2.showEmpty();
+                    }
+                } else {
+                    ToastUtil.showToast(resultBean.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+            }
+        });
+    }
+
+    @Override
+    protected void setListener() {
+        listValid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle mBundle = new Bundle();
+                mBundle.putString("type", "Valid");
+                mBundle.putParcelable("Bean", mValidList.get(position));
+                startActivity(CardDetailsActivity.class, mBundle);
+            }
+        });
+        listInvalid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle mBundle = new Bundle();
+                mBundle.putString("type", "Invalid");
+                mBundle.putParcelable("Bean", mInValidList.get(position));
+                startActivity(CardDetailsActivity.class, mBundle);
+            }
+        });
+    }
+
+    @OnClick(R.id.ll_title_back)
+    public void onViewClicked() {
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+}

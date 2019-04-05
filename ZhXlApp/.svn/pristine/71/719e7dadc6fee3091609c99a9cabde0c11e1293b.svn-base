@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.idyoga.yoga.common.view.Label.LabelLinearLayout
+        android:id="@+id/ll_label"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:padding="3dp"
+        app:backgroundColor="@color/text_color_tab_1"
+        app:direction="rightTop"
+        app:labelBottomPadding="10dp"
+        app:labelTopDistance="20dp"
+        app:labelTopPadding="10dp"
+        app:textContent="晚场"
+        app:textContentSize="14sp"
+        app:textTitleColor="#ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_vip_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="VIP权益卡"
+                android:textColor="#eaeaea"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="有效次数：90次（已用5次）"
+                android:textColor="#ededed"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="有效期：2018-10-10"
+                android:textColor="#ededed"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </com.idyoga.yoga.common.view.Label.LabelLinearLayout>
+
+</LinearLayout>

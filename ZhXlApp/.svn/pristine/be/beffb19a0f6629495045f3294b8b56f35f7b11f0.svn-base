@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
+        android:orientation="horizontal">
+
+        <vip.devkit.view.common.dtextview.DrawableTextView
+            android:id="@+id/tv_menu_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="快速问诊"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:drawableHeight="30dp"
+            app:drawablePosition="top"
+            app:drawableSrc="@drawable/icon_01"
+            app:drawableWidth="30dp" />
+
+        <vip.devkit.view.common.dtextview.DrawableTextView
+            android:id="@+id/tv_menu_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="预约"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:drawableHeight="30dp"
+            app:drawablePosition="top"
+            app:drawableSrc="@drawable/icon_02"
+            app:drawableWidth="30dp" />
+
+
+        <vip.devkit.view.common.dtextview.DrawableTextView
+            android:id="@+id/tv_menu_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="积分商城"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:drawableHeight="30dp"
+            app:drawablePosition="top"
+            app:drawableSrc="@drawable/icon_03"
+            app:drawableWidth="30dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#f2f2f2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_home_hp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/img_06" />
+
+        <RelativeLayout
+            android:id="@+id/rl_user_state"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/iv_home_hp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_register_name"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+
+            <TextView
+                android:id="@+id/tv_sign_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginTop="5dp"
+                android:text="累计打卡10天"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_sign_num"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_sign_in"
+                android:text="打卡"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_jf"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_04" />
+
+                    <TextView
+                        android:id="@+id/tv_points"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="3dp"
+                        android:gravity="center"
+                        android:text="0.1 积分"
+                        android:textColor="#b575bb"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_qd"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_05" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ProgressBar
+                            android:id="@+id/seek_bar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_marginTop="5dp"
+                            android:max="7"
+                            android:progressDrawable="@drawable/progress_sign" />
+
+                        <TextView
+                            android:id="@+id/tv_num_day"
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="5/7"
+                            android:textColor="#6279a1"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_go_login"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/iv_home_hp"
+            android:gravity="center|left"
+            android:text="亲，您还未登录哦"
+            android:textColor="@color/text_color"
+            android:textSize="15sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_study_course"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:text="我正在学习的视频课程" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@drawable/ic_more" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#f2f2f2" />
+
+</LinearLayout>

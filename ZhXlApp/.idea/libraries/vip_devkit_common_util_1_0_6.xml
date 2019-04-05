@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="vip.devkit:common.util-1.0.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/common.util-1.0.6.aar/837957d76567395bfc2399e6490f5ed8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/common.util-1.0.6.aar/837957d76567395bfc2399e6490f5ed8/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/vip.devkit/common.util/1.0.6/3b263de234ed50f60aec86552fb313c38a792555/common.util-1.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

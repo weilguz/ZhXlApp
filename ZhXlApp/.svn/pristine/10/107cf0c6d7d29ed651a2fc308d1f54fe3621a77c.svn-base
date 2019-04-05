@@ -1,0 +1,583 @@
+package com.idyoga.yoga.activity.shop;
+
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.adapter.PopupWindowSexAdapter;
+import com.idyoga.yoga.adapter.ShopExperienceCourseAdapter;
+import com.idyoga.yoga.base.BaseActivity;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.comm.AppContext;
+import com.idyoga.yoga.listener.OnVerticalScrollListener;
+import com.idyoga.yoga.model.PopupWindowItemBean;
+import com.idyoga.yoga.model.ResultBean;
+import com.idyoga.yoga.model.ShopCourseListBeanV2;
+import com.idyoga.yoga.model.ShopExperienceCourseTag;
+import com.idyoga.yoga.utils.ToastUtil;
+import com.idyoga.yoga.utils.YogaViewUtil;
+import com.idyoga.yoga.view.BgDarkPopupWindow;
+import com.idyoga.yoga.view.MyGridItemDecoration;
+import com.idyoga.yoga.view.YogaLayoutManager;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Call;
+import vip.devkit.library.ListUtil;
+import vip.devkit.library.Logcat;
+import vip.devkit.library.SharedPreferencesUtils;
+import vip.devkit.library.StringUtil;
+
+/**
+ * 文 件 名: ShopExperienceCourseActivity
+ * 功能描述:
+ * 创 建 人: By k
+ * 邮    箱:vip@devkit.vip
+ * 网    站:www.devkit.vip
+ * 创建日期: 2018/6/21
+ * 版   本: V 1.0
+ * 代码修改:（修改人 - 修改时间）
+ * 修改备注：
+ */
+public class ShopExperienceCourseActivity extends BaseActivity {
+
+    @BindView(R.id.ll_title_back)
+    LinearLayout mLlTitleBack;
+    @BindView(R.id.tv_title_text)
+    TextView mTvTitleText;
+    @BindView(R.id.ll_common_layout)
+    LinearLayout mLlCommonLayout;
+    @BindView(R.id.tab_view)
+    TabLayout mTabView;
+    @BindView(R.id.tv_sort)
+    TextView mTvSort;
+    @BindView(R.id.tv_filter)
+    TextView mTvFilter;
+    @BindView(R.id.ll_msg)
+    LinearLayout mLlMsg;
+    @BindView(R.id.rv_list)
+    RecyclerView mRvList;
+    @BindView(R.id.srl_Refresh)
+    SwipeRefreshLayout mRefreshLayout;
+    @BindView(R.id.ll_content_layout)
+    LinearLayout mLlContentLayout;
+    @BindView(R.id.iv_sort)
+    ImageView mIvSort;
+    @BindView(R.id.iv_filter)
+    ImageView mIvFilter;
+    @BindView(R.id.ll_sort_layout)
+    LinearLayout mLlSortLayout;
+    @BindView(R.id.ll_filter_layout)
+    LinearLayout mLlFilterLayout;
+
+    private int pageIndex = 1;
+    private boolean isLoadMore = true, isLoadMoreTag = true, isLoad = true, isTabTag = false;
+    private String className, classId;
+    private String cityId, latitude, longitude;
+    private String isSex = "", type = "", labelClassifyId = "", status = "";
+    private List<ShopCourseListBeanV2> mBeanList = new ArrayList<>();
+    private ShopExperienceCourseAdapter mAdapter;
+    private List<PopupWindowItemBean> mSortListBean;
+    private List<ShopExperienceCourseTag> mTagBeanList;
+
+
+    @Override
+    protected void initData() {
+        mTagBeanList = new ArrayList<>();
+        mSortListBean = new ArrayList<>();
+        mSortListBean.add(new PopupWindowItemBean("离我最近", false));
+        mSortListBean.add(new PopupWindowItemBean("即将开课", false));
+        cityId = (String) SharedPreferencesUtils.getSP(this, "cityId", "");
+        latitude = (String) SharedPreferencesUtils.getSP(AppContext.getInstance(), "latitude", "");
+        longitude = (String) SharedPreferencesUtils.getSP(AppContext.getInstance(), "longitude", "");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            isTabTag = false;
+            className = bundle.getString("className");
+            classId = bundle.getString("classId");
+            labelClassifyId = bundle.getString("classId");
+            status = "2";
+            getData();
+            getTagData();
+        }
+
+    }
+
+    private void initViewData(List<ShopCourseListBeanV2> beanList) {
+        Logcat.e("pageIndex:" + pageIndex + " size:" + beanList.size());
+        if (pageIndex == 1 && ListUtil.isEmpty(beanList)) {
+            Logcat.e("pageIndex2:" + pageIndex + " size:" + beanList.size());
+            mLayoutManager.showEmpty();
+            return;
+        } else {
+            mLayoutManager.showContent();
+        }
+        mAdapter.removeAllFooterView();
+        View view = null;
+        if (beanList.size() == 15) {
+            view = View.inflate(this, R.layout.view_loading_footer, null);
+        } else if (beanList.size() < 15) {
+            isLoadMore = false;
+            if (beanList.size() < 2) {
+                mRvList.setBackgroundColor(Color.parseColor("#f2f2f2"));
+            } else {
+                view = View.inflate(this, R.layout.view_list_footer, null);
+            }
+        }
+        mBeanList.addAll(beanList);
+        if (view != null) {
+            mAdapter.addFooterView(view);
+        }
+        mAdapter.notifyDataSetChanged();
+        pageIndex++;
+        isLoad = true;
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(mLlCommonLayout).init();
+    }
+
+    @Override
+    protected YogaLayoutManager initLayoutManager() {
+        return YogaLayoutManager.wrap(mRefreshLayout);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_experience_course;
+    }
+
+    @Override
+    protected void initView() {
+        mLayoutManager.setEmpty(R.layout.layout_card_child_empty);
+        mLayoutManager.initView(YogaLayoutManager.EMPTY).setText(R.id.tv_hint,"暂无该分类下的课程");
+        sexView = View.inflate(this, R.layout.layout_popupwindow_sex, null);
+        mTvTitleText.setText(className);
+        mLayoutManager.showLoading();
+        mTabView.setVisibility(View.GONE);
+        initRv();
+    }
+
+    private void initRv() {
+        mAdapter = new ShopExperienceCourseAdapter(R.layout.item_shop_course_list_v2, mBeanList);
+        MyGridItemDecoration decoration = new MyGridItemDecoration();
+        decoration.setSize(20);
+        decoration.setColor(Color.parseColor("#f4f4f4"));
+        mRvList.addItemDecoration(decoration);
+        mRvList.setLayoutManager(new LinearLayoutManager(this));
+        mRvList.setAdapter(mAdapter);
+    }
+
+    public void initEmpty() {
+        pageIndex = 1;
+        isSex = "";
+        type = "";
+        labelClassifyId = classId;
+        status = "2";
+        mBeanList.clear();
+        mTagBeanList.clear();
+        isLoadMore = true;
+        isLoad = true;
+        if (mAdapter != null) {
+            mAdapter.removeAllFooterView();
+            mAdapter.notifyDataSetChanged();
+        }
+        mTvSort.setText("排序");
+        mTvFilter.setText("筛选");
+        mTvSort.setTextColor(Color.parseColor("#333333"));
+        mTvFilter.setTextColor(Color.parseColor("#333333"));
+        mIvSort.setImageResource(R.drawable.icon_sort_n);
+        mIvFilter.setImageResource(R.drawable.icon_sort_n);
+    }
+
+    public void initEmpty(boolean isALL) {
+        pageIndex = 1;
+        isSex = "";
+        type = "";
+        labelClassifyId = classId;
+        status = "2";
+        isLoadMore = true;
+        isLoad = true;
+        mBeanList.clear();
+        mTvSort.setText("排序");
+        mTvFilter.setText("筛选");
+        mTvSort.setTextColor(Color.parseColor("#333333"));
+        mTvFilter.setTextColor(Color.parseColor("#333333"));
+        mIvSort.setImageResource(R.drawable.icon_sort_n);
+        mIvFilter.setImageResource(R.drawable.icon_sort_n);
+        if (isALL == true) {
+            mTagBeanList.clear();
+            mTabView.removeAllTabs();
+            mTabView.postInvalidate();
+        }
+        if (mAdapter != null) {
+            mAdapter.removeAllFooterView();
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    int tag = 0;
+
+    @Override
+    protected void setListener() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("shopId", mBeanList.get(position).getId() + "");
+                bundle.putString("name", mBeanList.get(position).getName() + "");
+                bundle.putString("getUrl", mBeanList.get(position).getUrl());
+                startActivity(ShopDetailActivity.class, bundle);
+            }
+        });
+        mRvList.addOnScrollListener(new OnVerticalScrollListener() {
+            @Override
+            public void onScrolledToBottom() {
+                super.onScrolledToBottom();
+                if (!ListUtil.isEmpty(mBeanList) && isLoadMore && isLoad) {
+                    isLoad = false;
+                    getData();
+                }
+            }
+        });
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pageIndex = 1;
+                isSex = "";
+                type = "";
+                isLoadMore = true;
+                isLoad = true;
+                mBeanList.clear();
+                mTvSort.setText("排序");
+                mTvFilter.setText("筛选");
+                mTvSort.setTextColor(Color.parseColor("#333333"));
+                mTvFilter.setTextColor(Color.parseColor("#333333"));
+                mIvSort.setImageResource(R.drawable.icon_sort_n);
+                mIvFilter.setImageResource(R.drawable.icon_sort_n);
+                if (mAdapter!=null){
+                    mAdapter.notifyDataSetChanged();
+                }
+                getData();
+                mRefreshLayout.setRefreshing(false);
+            }
+        });
+        mTabView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isTabTag = true;
+            }
+        });
+        mTabView.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Logcat.e("--------------tab" + tab.getText().toString() + "/" + isTabTag + "/tag" + tag);
+                if (tag != 0) {
+                    isTabTag = true;
+                }
+                if (isTabTag == true) {
+                    if (tab.getText().equals("全部")) {
+                        Logcat.e("--------------tab1");
+                        initEmpty(false);
+                        labelClassifyId = classId;
+                        status = "2";
+                        getData();
+                    } else {
+                        Logcat.e("--------------tab2");
+                        showLoading();
+                        initEmpty(false);
+                        if (mTagBeanList.get(tab.getPosition())!=null){
+                            labelClassifyId = mTagBeanList.get(tab.getPosition()).getId() + "";
+                        }else {
+                            labelClassifyId=classId;
+                        }
+                        status = "1";
+                        getData();
+                    }
+                }
+                tag++;
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    View sexView;
+
+    @OnClick({R.id.ll_title_back, R.id.tv_sort, R.id.tv_filter, R.id.ll_sort_layout, R.id.ll_filter_layout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_title_back:
+                finish();
+                break;
+            case R.id.tv_sort:
+                showMenu(mTvFilter, "1");
+                break;
+            case R.id.tv_filter:
+                showMenu(mTvFilter, "2");
+                break;
+            case R.id.ll_sort_layout:
+                showMenu(mTvFilter, "1");
+                break;
+            case R.id.ll_filter_layout:
+                showMenu(mTvFilter, "2");
+                break;
+        }
+    }
+
+    public void showMenu(View view, String tag) {
+        View contentView;
+        if (tag.equals("1")) {
+            contentView = View.inflate(this, R.layout.layout_popupwindow_sort, null);
+            contentView.setBackgroundColor(Color.WHITE);
+            showSort(contentView, view);
+        } else if (tag.equals("2")) {
+            contentView = View.inflate(this, R.layout.layout_popupwindow_sex, null);
+            showSex(contentView, view);
+        }
+    }
+
+
+    BgDarkPopupWindow mPopupWindow;
+    PopupWindowSexAdapter mSexAdapter;
+
+    public void showSort(View contentView, View view) {
+        final ListView listView = contentView.findViewById(R.id.lv_list);
+        mSexAdapter = new PopupWindowSexAdapter(mContext, mSortListBean, R.layout.item_select_d);
+        listView.setAdapter(mSexAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                showLoading("加载中...");
+                mSexAdapter.setVisibility(i);
+                if (mSortListBean.get(i).getName().equals("离我最近")) {
+                    initEmpty(false);
+                    type = "1";
+                    getData();
+                } else {
+                    initEmpty(false);
+                    type = "2";
+                    getData();
+                }
+                if (mTvSort != null) {
+                    mTvSort.setText(mSortListBean.get(i).getName());
+                    mTvSort.setTextColor(getResources().getColor(R.color.theme_1));
+                }
+                if (mIvSort != null) {
+                    mIvSort.setImageResource(R.drawable.icon_sort_y);
+                }
+                mSexAdapter.notifyDataSetChanged();
+                if (mPopupWindow != null) {
+                    mPopupWindow.dismiss();
+                }
+            }
+        });
+        mPopupWindow = new BgDarkPopupWindow(this, contentView);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+        mPopupWindow.setDarkStyle(-1);
+        mPopupWindow.setDarkColor(Color.parseColor("#a0000000"));
+        mPopupWindow.resetDarkPosition();
+        mPopupWindow.darkBelow(view);
+        mPopupWindow.setHeight(getListHeight(mSexAdapter, listView));
+        mPopupWindow.showAsDropDown(view, 0, 0);
+    }
+
+
+    public void showSex(View contentView, View view) {
+        TextView mTvAll = contentView.findViewById(R.id.tv_all);
+        TextView mTvBoy = contentView.findViewById(R.id.tv_boy);
+        TextView mTvGirl = contentView.findViewById(R.id.tv_girl);
+        mTvAll.setOnClickListener(mClickListener);
+        mTvBoy.setOnClickListener(mClickListener);
+        mTvGirl.setOnClickListener(mClickListener);
+        if (!StringUtil.isEmpty(isSex)) {
+            if (isSex.equals("0")) {
+                mTvAll.setTextColor(Color.WHITE);
+                mTvAll.setBackgroundResource(R.drawable.bg_a_05_a);
+            } else if (isSex.equals("1")) {
+                mTvBoy.setTextColor(Color.WHITE);
+                mTvBoy.setBackgroundResource(R.drawable.bg_a_05_a);
+            } else if (isSex.equals("2")) {
+                mTvGirl.setTextColor(Color.WHITE);
+                mTvGirl.setBackgroundResource(R.drawable.bg_a_05_a);
+            }
+        }
+        mPopupWindow = new BgDarkPopupWindow(this, contentView);
+        mPopupWindow.setHeight(YogaViewUtil.dp2px(this, 50));
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+        mPopupWindow.setDarkStyle(-1);
+        mPopupWindow.setDarkColor(Color.parseColor("#a0000000"));
+        mPopupWindow.resetDarkPosition();
+        mPopupWindow.darkBelow(view);
+        mPopupWindow.showAsDropDown(view, 0, 0);
+    }
+
+    private int getListHeight(PopupWindowSexAdapter adapter, ListView listView) {
+        if (adapter == null) {
+            return 0;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        totalHeight = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        return totalHeight;
+    }
+
+    private void getData() {
+        Map map = new HashMap();
+        map.put("cityId", cityId + "");
+        map.put("lat", latitude + "");
+        map.put("long", longitude + "");
+        map.put("page", pageIndex + "");
+        map.put("size", "15");
+        map.put("isSex", isSex + "");/**性别筛选*/
+        map.put("type", type + "");/**排序*/
+        map.put("labelClassifyId", labelClassifyId + "");
+        map.put("status", status + "");
+        Logcat.e("瑜伽馆权益课分类：" + map.toString());
+        OkHttpUtils.post().url(ApiConstants.Urls.HOME_EXPERIENCE_SHOP_V2).params(map).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                dismissLoading();
+                mLayoutManager.showNetError();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                dismissLoading();
+                ResultBean bean = JSON.parseObject(response, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    List<ShopCourseListBeanV2> beanList = JSON.parseArray(bean.getData(), ShopCourseListBeanV2.class);
+                    initViewData(beanList);
+                } else {
+                    ToastUtil.showToast(bean.getMsg());
+                }
+            }
+        });
+    }
+
+    public void getTagData() {
+        Map map = new HashMap();
+        map.put("classifyId", classId + "");
+        Logcat.e("瑜伽馆权益课分类 tag：" + map.toString());
+        OkHttpUtils.post().url(ApiConstants.Urls.SHOP_EXPERIENCE_TAG).params(map).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultBean bean = JSON.parseObject(response, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    List<ShopExperienceCourseTag> beanList = JSON.parseArray(bean.getData(), ShopExperienceCourseTag.class);
+                    initTagViewData(beanList);
+                }
+            }
+        });
+    }
+
+    private void initTagViewData(List<ShopExperienceCourseTag> beanList) {
+        mTagBeanList.clear();
+        if (!ListUtil.isEmpty(beanList)&&beanList.size()>1){
+            mTagBeanList.add(new ShopExperienceCourseTag(0, "全部"));
+        }
+        if (!ListUtil.isEmpty(beanList)) {
+            mTagBeanList.addAll(beanList);
+        }
+        for (int i = 0; i < mTagBeanList.size(); i++) {
+            mTabView.addTab(mTabView.newTab().setText(mTagBeanList.get(i).getName()));
+        }
+        if (mTagBeanList.size()>0){
+            mTabView.setVisibility(View.VISIBLE);
+        }else {
+            mTabView.setVisibility(View.GONE);
+        }
+    }
+
+    View.OnClickListener mClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            showLoading("加载中...");
+            switch (view.getId()) {
+                case R.id.tv_all:
+                    initEmpty(false);
+                    if (mPopupWindow != null) {
+                        mPopupWindow.dismiss();
+                    }
+                    if (mTvFilter != null) {
+                        mTvFilter.setText("男女不限");
+                    }
+                    isSex = "0";
+                    getData();
+                    break;
+                case R.id.tv_boy:
+                    initEmpty(false);
+                    if (mPopupWindow != null) {
+                        mPopupWindow.dismiss();
+                    }
+                    if (mTvFilter != null) {
+                        mTvFilter.setText("只限男生");
+                    }
+                    isSex = "1";
+                    getData();
+                    break;
+                case R.id.tv_girl:
+                    initEmpty(false);
+                    if (mPopupWindow != null) {
+                        mPopupWindow.dismiss();
+                    }
+                    if (mTvFilter != null) {
+                        mTvFilter.setText("只限女生");
+                    }
+                    isSex = "2";
+                    getData();
+                    break;
+            }
+            if (mIvFilter != null) {
+                mIvFilter.setImageResource(R.drawable.icon_sort_y);
+            }
+            if (mTvFilter != null) {
+                mTvFilter.setTextColor(getResources().getColor(R.color.theme_1));
+            }
+        }
+    };
+
+}

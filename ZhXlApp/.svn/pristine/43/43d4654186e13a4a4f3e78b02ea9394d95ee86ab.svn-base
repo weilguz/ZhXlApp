@@ -1,0 +1,298 @@
+package com.idyoga.yoga.activity.home;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.activity.course.AppointmentCourseDetailActivity;
+import com.idyoga.yoga.base.BaseActivity;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.common.http.type1.HttpClient;
+import com.idyoga.yoga.common.http.type1.HttpResponseHandler;
+import com.idyoga.yoga.model.ExperienceCourseAppointmentBean;
+import com.idyoga.yoga.model.ResultBean;
+import com.idyoga.yoga.utils.CommonUtils;
+import com.idyoga.yoga.utils.DateUtils;
+import com.idyoga.yoga.utils.GlideImgManager;
+import com.idyoga.yoga.utils.JsonUtil;
+import com.idyoga.yoga.utils.LoginUtil;
+import com.idyoga.yoga.utils.ToastUtil;
+import com.idyoga.yoga.utils.YogaViewUtil;
+import com.idyoga.yoga.view.YogaLayoutManager;
+import com.idyoga.yoga.view.csstv.CSSTextView;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Request;
+import vip.devkit.library.ListUtil;
+import vip.devkit.library.Logcat;
+import vip.devkit.library.SharedPreferencesUtils;
+import vip.devkit.library.StringUtil;
+import vip.devkit.view.common.suklib.view.FlowLayout.TagFlowLayout;
+
+
+public class ExperienceLessonAppointmentActivity extends BaseActivity {
+
+
+    @BindView(R.id.ll_title_back)
+    LinearLayout mLlTitleBack;
+    @BindView(R.id.tv_title_text)
+    TextView mTvTitleText;
+    @BindView(R.id.ll_common_layout)
+    LinearLayout mLlCommonLayout;
+    @BindView(R.id.iv_img)
+    ImageView mIvImg;
+    @BindView(R.id.tv_course_name)
+    TextView mTvCourseName;
+    @BindView(R.id.tv_course_tutor)
+    TextView mTvCourseTutor;
+    @BindView(R.id.tv_course_time)
+    TextView mTvCourseTime;
+    @BindView(R.id.rl_itemView)
+    RelativeLayout mRlItemView;
+    @BindView(R.id.tag_view)
+    TagFlowLayout mTagView;
+    @BindView(R.id.ll_layout_item)
+    LinearLayout mLlLayoutItem;
+    @BindView(R.id.tv_date)
+    CSSTextView mTvDate;
+    @BindView(R.id.tv_shop_name)
+    CSSTextView mTvShopName;
+    @BindView(R.id.tv_shop_address)
+    CSSTextView mTvShopAddress;
+    @BindView(R.id.tv_shop_mobile)
+    CSSTextView mTvShopMobile;
+    @BindView(R.id.rg_view)
+    RadioGroup mRgView;
+    @BindView(R.id.sv_view)
+    ScrollView mSvView;
+    @BindView(R.id.tv_next)
+    TextView mTvNext;
+    @BindView(R.id.ll_foot_layout)
+    RelativeLayout mLlFootLayout;
+    @BindView(R.id.ll_data_null)
+    LinearLayout mLlCardNULL;
+    private String shopId = "";
+    private String courseId = "";
+    private String token = "";
+
+    private ExperienceCourseAppointmentBean mCourseAppointmentBean;
+    private List<ExperienceCourseAppointmentBean.UsingMembershipBean> cardListBean;
+    private String shopName, shopAddress, shopMobile, distance;
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.statusBarDarkFont(true);
+        mImmersionBar.titleBar(mLlCommonLayout).init();
+    }
+
+
+    @Override
+    protected void initData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            shopId = bundle.getString("shopId");
+            courseId = bundle.getString("courseId");
+            shopName = bundle.getString("name");
+            shopAddress = bundle.getString("address");
+            distance = bundle.getString("distance");
+            shopMobile = bundle.getString("mobile");
+            token = (String) SharedPreferencesUtils.getSP(this, "Token", "");
+            getData(shopId, courseId, token);
+        } else {
+            Logcat.e("参数异常");
+        }
+    }
+
+    @Override
+    protected YogaLayoutManager initLayoutManager() {
+        return YogaLayoutManager.wrap(mSvView);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_exprience_appointment_info;
+    }
+
+    @Override
+    protected void initView() {
+        mTvTitleText.setText("预约课程");
+        mLayoutManager.showLoading();
+        mTvShopMobile.setVisibility(View.VISIBLE);
+    }
+
+    private void initViewData(ExperienceCourseAppointmentBean courseAppointmentBean) {
+        this.mCourseAppointmentBean = courseAppointmentBean;
+        if (mCourseAppointmentBean != null) {
+            GlideImgManager.glideLoaders(this, mCourseAppointmentBean.getCourseDetail().getLesson_img(), mIvImg);
+            mTvCourseName.setText(mCourseAppointmentBean.getCourseDetail().getLesson_name());
+                mTvCourseTutor.setText("导师：" + mCourseAppointmentBean.getCourseDetail().getTutor_name());
+            mTvCourseTime.setText("时长：" + DateUtils.secondToTime(mCourseAppointmentBean.getCourseDetail().getEnd_time() - mCourseAppointmentBean.getCourseDetail().getStart_time()));
+            mTvDate.setText("时间：" + CommonUtils.getDateStringByTimeSTamp((long) mCourseAppointmentBean.getCourseDetail().getStart_time(), "yyyy年MM月dd日") + "  " +
+                    CommonUtils.getDateStringByTimeSTamp((long) mCourseAppointmentBean.getCourseDetail().getStart_time(), "HH:mm") + "-" +
+                    CommonUtils.getDateStringByTimeSTamp((long) mCourseAppointmentBean.getCourseDetail().getEnd_time(), "HH:mm")
+            );
+            mTvDate.setTextArrColor("时间：", Color.parseColor("#333333"));
+            mTvShopName.setText("瑜伽馆：" + shopName);
+            mTvDate.setTextArrColor("瑜伽馆：", Color.parseColor("#333333"));
+            String mDistance = "(距您 " + distance + "km)";
+            String address = "地址: " + shopAddress + mDistance;
+            mTvShopAddress.setText(address);
+            mTvShopAddress.setTextArrColor(mDistance, Color.parseColor("#666666"));
+            mTvShopAddress.setTextArrSize(mDistance, 10);
+            mTvShopAddress.setTextArrColor("地址：", Color.parseColor("#333333"));
+            String mobile ="暂未填写";
+            if (!StringUtil.isEmpty(mCourseAppointmentBean.getShopInfo().getMobile())){
+                mobile=mCourseAppointmentBean.getShopInfo().getMobile();
+            }
+            mobile=" 4009020929";
+            mTvShopMobile.setText("客服电话：" + mobile);
+            mTvShopMobile.setTextArrColor("客服电话：", Color.parseColor("#333333"));
+            cardListBean = new ArrayList<>();
+            initPayView(mCourseAppointmentBean.getUsingMembership());
+            mLayoutManager.showContent();
+        }
+    }
+
+    private void initPayView(List<ExperienceCourseAppointmentBean.UsingMembershipBean> beans) {
+        if (ListUtil.isEmpty(beans)){
+            mRgView.setVisibility(View.GONE);
+            mLlCardNULL.setVisibility(View.VISIBLE);
+            mTvNext.setText("没有可用权益卡");
+            mTvNext.setEnabled(false);
+            mTvNext.setBackgroundColor(Color.parseColor("#dbb4d7"));
+            return;
+        }else {
+            mTvNext.setEnabled(true);
+            cardListBean.addAll(mCourseAppointmentBean.getUsingMembership());
+            mLlCardNULL.setVisibility(View.GONE);
+            mRgView.setVisibility(View.VISIBLE);
+        }
+        for (int i = 0; i <beans.size(); i++) {
+            ExperienceCourseAppointmentBean.UsingMembershipBean bean = beans.get(i);
+            RadioButton button = new RadioButton(this);
+            button.setText(bean.getCard_name());
+            button.setButtonDrawable(null);
+            Drawable drawable = getResources().getDrawable(R.drawable.cb_common);
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            button.setCompoundDrawables(null, null, drawable, null);
+            mRgView.addView(button);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    YogaViewUtil.dp2px(this, 50));
+            layoutParams.setMargins(YogaViewUtil.dp2px(this, 12), 0, YogaViewUtil.dp2px(this, 12), 0);
+            button.setLayoutParams(layoutParams);
+        }
+
+    }
+
+    private void getData(String shopId, String courseId, String token) {
+        Map map = new HashMap();
+        map.put("shopId", shopId);
+        map.put("courseId", courseId);
+        map.put("token", token);
+        HttpClient.post(ApiConstants.Urls.APPOINTMENT_COURSE_INFO, map, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                ResultBean bean = JSON.parseObject(content, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    mCourseAppointmentBean = JSON.parseObject(bean.getData(), ExperienceCourseAppointmentBean.class);
+                    initViewData(mCourseAppointmentBean);
+                } else {
+                    ToastUtil.showToast(bean.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+                super.onFailure(request, e);
+            }
+        });
+    }
+
+    @Override
+    protected void setListener() {
+
+    }
+
+    private void appointmentCourse(String membershipId) {
+        showLoading("加载中...", true);
+        Map map = new HashMap();
+        map.put("shopId", shopId + "");
+        map.put("courseId", courseId + "");
+        map.put("membershipId", membershipId + "");
+        map.put("token", token + "");
+        Log.d("appointmentLesson", "appointmentLesson: " + shopId + "===" + courseId + "===" + membershipId + "===" + token);
+        HttpClient.post(ApiConstants.Urls.APPOINTMENT_LESSON_V2, map, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                dismissLoading();
+                Logcat.e("预约结果：" + content);
+                ResultBean bean = JSON.parseObject(content, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    Bundle mBundle = new Bundle();
+                    mBundle.putString("stateType", "");
+                    mBundle.putString("courseId", courseId+ "");
+                    mBundle.putString("shopId", shopId + "");
+                    mBundle.putString("appointmentId", JsonUtil.parserSingleData(bean.getData(), "appId") + "");
+                    startActivity(AppointmentCourseDetailActivity.class, mBundle);
+//                    startActivity(LessonAppointmentResultActivity.class, bundle);
+                    finish();
+                } else {
+                    ToastUtil.showToast(bean.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+                super.onFailure(request, e);
+                dismissLoading();
+            }
+        });
+    }
+
+
+    @OnClick({R.id.ll_title_back, R.id.tv_next})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_title_back:
+                finish();
+                break;
+            case R.id.tv_next:
+                if (!LoginUtil.checkLogin(this)) return;
+                if (mRgView.getCheckedRadioButtonId() == -1) {
+                    ToastUtil.showToast("请选择需要支付的卡");
+                } else {
+                    RadioButton button = mRgView.findViewById(mRgView.getCheckedRadioButtonId());
+                    String cardName = button.getText().toString().trim();
+                    String membershipId = null;
+                    for (int i = 0; i < cardListBean.size(); i++) {
+                        if (cardListBean.get(i).getCard_name().equals(cardName)) {
+                            membershipId = cardListBean.get(i).getId() + "";
+                        }
+                    }
+                    appointmentCourse(membershipId);
+                }
+                break;
+        }
+    }
+}

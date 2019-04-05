@@ -1,0 +1,43 @@
+package com.idyoga.yoga.adapter;
+
+import android.content.Context;
+
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.common.adapter.CommonAdapter;
+import com.idyoga.yoga.common.adapter.ViewHolder;
+import com.idyoga.yoga.model.realm.ShopExperienceCourseClass;
+import com.idyoga.yoga.model.realm.ShopExperienceCourseClassTag;
+
+import java.util.List;
+
+public class PopupWindowClassAdapter extends CommonAdapter<ShopExperienceCourseClass> {
+
+    public PopupWindowClassAdapter(Context context, List<ShopExperienceCourseClass> mBeanList, int layoutId) {
+        super(context, mBeanList, layoutId);
+    }
+
+
+    @Override
+    public void convert(ViewHolder holder, ShopExperienceCourseClass bean, int position) {
+        holder.setText(R.id.tv_city_name,bean.getName());
+        if (bean.isVisibility()){
+            holder.getConvertView().setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        }else {
+            holder.getConvertView().setBackgroundColor(mContext.getResources().getColor(R.color.bg_f2));
+        }
+    }
+    public void setVisibility(int position) {
+        if (position==-1){
+            return;
+        }
+        for (int i = 0; i < mBeanList.size(); i++) {
+            if (position == i) {
+                mBeanList.get(i).setVisibility(true);
+            } else {
+                mBeanList.get(i).setVisibility(false);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+}

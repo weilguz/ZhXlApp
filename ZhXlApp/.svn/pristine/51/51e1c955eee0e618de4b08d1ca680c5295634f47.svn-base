@@ -1,0 +1,391 @@
+package com.idyoga.yoga.activity.home;
+
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Layout;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.UnderlineSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.activity.user.AccountActivity;
+import com.idyoga.yoga.base.BaseActivity;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.common.http.type1.HttpClient;
+import com.idyoga.yoga.common.http.type1.HttpResponseHandler;
+import com.idyoga.yoga.model.ResultBean;
+import com.idyoga.yoga.model.ShopMarketCourseDetailBean;
+import com.idyoga.yoga.model.UserInfoBean;
+import com.idyoga.yoga.utils.CommonUtils;
+import com.idyoga.yoga.utils.DateUtils;
+import com.idyoga.yoga.utils.DialogUtil;
+import com.idyoga.yoga.utils.HtmlBuilder;
+import com.idyoga.yoga.utils.LoginUtil;
+import com.idyoga.yoga.utils.SpannableHelper;
+import com.idyoga.yoga.utils.ToastUtil;
+import com.idyoga.yoga.utils.UserUtil;
+import com.idyoga.yoga.view.YogaLayoutManager;
+import com.idyoga.yoga.view.csstv.CSSTextView;
+import com.idyoga.yoga.view.csstv.MTextView;
+import com.idyoga.yoga.view.dialog.CommonDialog;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.Request;
+import vip.devkit.library.ListUtil;
+import vip.devkit.library.Logcat;
+import vip.devkit.library.SharedPreferencesUtils;
+import vip.devkit.view.common.pile.PileLayout;
+import vip.devkit.view.common.suklib.view.FlowLayout.FlowLayout;
+import vip.devkit.view.common.suklib.view.FlowLayout.TagAdapter;
+import vip.devkit.view.common.suklib.view.FlowLayout.TagFlowLayout;
+
+
+public class AppointmentIntroductionActivity extends BaseActivity {
+
+    @BindView(R.id.rl_layout)
+    RelativeLayout mRlLayout;
+    @BindView(R.id.ll_title_back)
+    LinearLayout mLlTitleBack;
+    @BindView(R.id.tv_title_text)
+    TextView mTvTitleText;
+    @BindView(R.id.ll_common_layout)
+    LinearLayout mLlCommonLayout;
+    @BindView(R.id.iv_img)
+    ImageView mIvImg;
+    @BindView(R.id.tv_name)
+    TextView mTvName;
+    @BindView(R.id.tv_time)
+    TextView mTvTime;
+    @BindView(R.id.tag_view)
+    TagFlowLayout mTagView;
+    @BindView(R.id.rv_list)
+    RecyclerView mRvList;
+    @BindView(R.id.iv_tutor_img)
+    ImageView mIvTutorImg;
+    @BindView(R.id.tv_tutor_name)
+    TextView mTvTutorName;
+    @BindView(R.id.tag_view_tutor)
+    TagFlowLayout mTagViewTutor;
+    @BindView(R.id.ll_tutor_layout)
+    LinearLayout mLlTutorLayout;
+    @BindView(R.id.tv_course_time)
+    TextView mTvCourseTime;
+    @BindView(R.id.tv_shop_name)
+    CSSTextView mTvShopName;
+    @BindView(R.id.tv_address)
+    TextView mTvAddress;
+    @BindView(R.id.ll_number_null)
+    LinearLayout mLlNumberNull;
+    @BindView(R.id.rl_join_number)
+    RelativeLayout mRlNumberl;
+    @BindView(R.id.tv_join_number)
+    TextView mTvJoinNumber;
+    @BindView(R.id.ll_layout)
+    LinearLayout mLlLayout;
+    @BindView(R.id.pl_view)
+    PileLayout mPlView;
+    @BindView(R.id.tv_course_introduce)
+    TextView mTvCourseIntroduce;
+    @BindView(R.id.sv_view)
+    ScrollView mSvView;
+    @BindView(R.id.tv_next)
+    TextView mTvNext;
+    @BindView(R.id.ll_foot_layout)
+    RelativeLayout mLlFootLayout;
+    private ShopMarketCourseDetailBean mCourseDetailBean;
+    private String shopId, lessonId, token, lat, lng;
+    private String tag;
+    private List<String> pileList = new ArrayList<>();
+
+    @Override
+    protected void initData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            tag= bundle.getString("tag");
+            shopId = bundle.getString("shopId");
+            lessonId = bundle.getString("lessonId");
+            token = (String) SharedPreferencesUtils.getSP(this, "Token", "");
+            lat = (String) SharedPreferencesUtils.getSP(this, "latitude", "");
+            lng = (String) SharedPreferencesUtils.getSP(this, "longitude", "");
+            Logcat.i("接收到的值：" + shopId + "/" + lessonId + "/" + token + "/" + lat + "/" + lng);
+            getData(shopId, lessonId, token, lat, lng);
+        } else {
+            Logcat.e("参数为空");
+        }
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_exprience_appointment_introduction;
+    }
+
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(mLlCommonLayout).init();
+    }
+
+    @Override
+    protected YogaLayoutManager initLayoutManager() {
+        return YogaLayoutManager.wrap(mRlLayout);
+    }
+
+    @Override
+    protected void initView() {
+        mTvTitleText.setText("课程详情");
+        mLayoutManager.showLoading();
+        if (!TextUtils.isEmpty(tag)&&tag.equals("close")){
+            mLlFootLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void initViewData(ShopMarketCourseDetailBean courseDetailBean) {
+        this.mCourseDetailBean = courseDetailBean;
+        if (courseDetailBean != null) {
+            mTvTitleText.setText(courseDetailBean.getCourseDetail().getLessonName());
+            mTvName.setText(courseDetailBean.getCourseDetail().getLessonName());
+            mTvTime.setText("时长：" + DateUtils.secondToTime(courseDetailBean.getCourseDetail().getEnd() - courseDetailBean.getCourseDetail().getStart()));
+            mTvCourseIntroduce.setText(courseDetailBean.getCourseDetail().getIntroduce());
+            Glide.with(this).load(courseDetailBean.getCourseDetail().getLessonImg())
+                    .placeholder(R.drawable.img_course).error(R.drawable.img_course).into(mIvImg);
+            String distance = "(距您 " + courseDetailBean.getShopInfo().getCompare() + "km)";
+            String address = "地址: " + courseDetailBean.getShopInfo().getAddress();
+            mTvShopName.setText("瑜伽馆：" + courseDetailBean.getShopInfo().getName());
+            mTvShopName.setTextArrColor("瑜伽馆：", Color.parseColor("#333333"));
+//            mTvAddress.setText(CommonUtils.toSBC(address));
+//            address= CommonUtils.toSBC(address);
+            mTvAddress.setMovementMethod(LinkMovementMethod.getInstance());
+            SpannableHelper.Builder(mContext, "")
+                    .setBold().setAlign(Layout.Alignment.ALIGN_NORMAL)
+                    .append(address).setForegroundColor(this.getResources().getColor(R.color.text_color_3)).setSize(14)
+                    .append(distance).setForegroundColor(this.getResources().getColor(R.color.text_color_6)).setSize(10)
+                    .into(mTvAddress);
+            mTvCourseTime.setText(CommonUtils.getDateStringByTimeSTamp((long) courseDetailBean.getCourseDetail().getStart(), "yyyy年MM月dd日") + "  " +
+                    CommonUtils.getDateStringByTimeSTamp((long) courseDetailBean.getCourseDetail().getStart(), "HH:mm") + "-" +
+                    CommonUtils.getDateStringByTimeSTamp((long) courseDetailBean.getCourseDetail().getEnd(), "HH:mm")
+            );
+            mTvJoinNumber.setText((courseDetailBean.getCourseDetail().getSumNumber() - courseDetailBean.getCourseDetail().getResidueNumber()) + "/" + courseDetailBean.getCourseDetail().getSumNumber() + "人");
+            for (int i = 0; i < courseDetailBean.getCourseAppList().size(); i++) {
+                pileList.add(courseDetailBean.getCourseAppList().get(i).getAvatar_url());
+            }
+            if (courseDetailBean.getCourseAppList().size() > 0) {
+                mRlNumberl.setVisibility(View.VISIBLE);
+                mLlNumberNull.setVisibility(View.GONE);
+                mPlView.setErrorImg(R.drawable.ic_user_hp);
+                mPlView.setViewSize(35);
+                mPlView.setFlag(false);
+                mPlView.setSpWidth(25);
+                mPlView.setData(pileList);
+            } else {
+                mRlNumberl.setVisibility(View.GONE);
+                mLlNumberNull.setVisibility(View.VISIBLE);
+            }
+            Logcat.i("--------------: " + courseDetailBean.getCourseDetail().getTutor().size());
+            if (courseDetailBean.getCourseDetail().getTutor().size() > 1) {
+                mRvList.setVisibility(View.VISIBLE);
+                mLlTutorLayout.setVisibility(View.GONE);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                mRvList.setLayoutManager(layoutManager);
+                mRvList.setAdapter(new BaseQuickAdapter<ShopMarketCourseDetailBean.CourseDetailBean.TutorBean, BaseViewHolder>(R.layout.item_shop_tutor, courseDetailBean.getCourseDetail().getTutor()) {
+                    @Override
+                    protected void convert(BaseViewHolder helper, ShopMarketCourseDetailBean.CourseDetailBean.TutorBean item) {
+                        Glide.with(mContext).load(item.getImage()).placeholder(R.drawable.img_06).error(R.drawable.img_06).into((ImageView) helper.getView(R.id.iv_img));
+                        helper.setText(R.id.tv_name, item.getName());
+                    }
+                });
+            } else if (courseDetailBean.getCourseDetail().getTutor().size() == 1) {
+                mRvList.setVisibility(View.GONE);
+                mLlTutorLayout.setVisibility(View.VISIBLE);
+                mTagViewTutor.setVisibility(View.VISIBLE);
+                mTvTutorName.setText(courseDetailBean.getCourseDetail().getTutor().get(0).getName());
+                Glide.with(this).load(courseDetailBean.getCourseDetail().getTutor().get(0).getImage())
+                        .placeholder(R.drawable.img_05).error(R.drawable.img_05).into(mIvTutorImg);
+                Logcat.i("Bean:" + courseDetailBean.getCourseDetail().getTutor().get(0).getMainstream().size() + courseDetailBean.getCourseDetail().getTutor().get(0).getMainstream().toString());
+                if (!ListUtil.isEmpty(courseDetailBean.getCourseDetail().getTutor().get(0).getMainstream())) {
+                    mTagViewTutor.setVisibility(View.VISIBLE);
+                }
+                mTagViewTutor.setAdapter(new TagAdapter<ShopMarketCourseDetailBean.CourseDetailBean.TutorBean.Mainstream>(courseDetailBean.getCourseDetail().getTutor().get(0).getMainstream()) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, ShopMarketCourseDetailBean.CourseDetailBean.TutorBean.Mainstream bean) {
+                        LayoutInflater mInflater = LayoutInflater.from(mContext);
+                        TextView tv = (TextView) mInflater.inflate(R.layout.layout_tag, parent, false);
+                        tv.setText(bean.getMainstreamName());
+                        tv.setTextSize(10f);
+                        tv.setPadding(0, 0, 0, 0);
+                        tv.setTextColor(Color.parseColor("#b86caf"));
+                        tv.setBackgroundResource(R.drawable.bg_shop_01);
+                        return tv;
+                    }
+                });
+            }
+            if (!ListUtil.isEmpty(courseDetailBean.getCourseDetail().getTag())) {
+                mTagView.setVisibility(View.VISIBLE);
+            }
+            mTagView.setAdapter(new TagAdapter<ShopMarketCourseDetailBean.CourseDetailBean.TagBean>(courseDetailBean.getCourseDetail().getTag()) {
+                @Override
+                public View getView(FlowLayout parent, int position, ShopMarketCourseDetailBean.CourseDetailBean.TagBean bean) {
+                    LayoutInflater mInflater = LayoutInflater.from(mContext);
+                    TextView tv = (TextView) mInflater.inflate(R.layout.option_item, parent, false);
+                    tv.setText(bean.getName());
+                    tv.setTextSize(10f);
+                    tv.setTextColor(Color.parseColor("#b86caf"));
+                    tv.setBackgroundResource(R.drawable.bg_a_13);
+                    return tv;
+                }
+            });
+            mLayoutManager.showContent();
+        }
+    }
+
+    private void getData(String shopId, String lessonId, String token, String lat, String lng) {
+        Map map = new HashMap();
+        map.put("shopId", "" + shopId);
+        map.put("courseId", "" + lessonId);
+        map.put("token", "" + token);
+        map.put("long", "" + lng);
+        map.put("lat", "" + lat);
+        Logcat.e("权益课详情提交的参数:" + map.toString());
+        HttpClient.post(ApiConstants.Urls.SHOP_MARKET_COURSE_DETAILS_V2, map, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Logcat.e("权益课详情:" + content);
+                ResultBean bean = JSON.parseObject(content, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    mCourseDetailBean = JSON.parseObject(bean.getData(), ShopMarketCourseDetailBean.class);
+                    initViewData(mCourseDetailBean);
+                } else {
+                    ToastUtil.showToast(bean.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+                super.onFailure(request, e);
+                mLayoutManager.showNetError();
+            }
+        });
+
+    }
+
+
+    @Override
+    protected void setListener() {
+
+    }
+
+    @Override
+    protected void checkNetState(Context mContext) {
+        super.checkNetState(mContext);
+    }
+
+    @OnClick({R.id.ll_title_back, R.id.tv_next})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_title_back:
+                finish();
+                break;
+            case R.id.tv_next:
+                if (!LoginUtil.checkLogin(this)) return;
+                UserInfoBean userInfoBean = UserUtil.getUserBean(this);
+//                if (null != userInfoBean && userInfoBean.getType().equals("true")) {
+//                    showTips();
+//                    return;
+//                }
+                Bundle bundle = new Bundle();
+                bundle.putString("shopId", shopId);
+                bundle.putString("courseId", lessonId);
+                bundle.putString("name", mCourseDetailBean.getShopInfo().getName());
+                bundle.putString("address", mCourseDetailBean.getShopInfo().getAddress());
+                bundle.putString("distance", mCourseDetailBean.getShopInfo().getCompare() + "");
+                bundle.putString("mobile", mCourseDetailBean.getShopInfo().getMobile());
+                startActivity(ExperienceLessonAppointmentActivity.class, bundle);
+                break;
+        }
+    }
+
+    private void showTips() {
+        DialogUtil.wrap(this).setData("提示", "请先去完善个人信息").setActionClickListener(new DialogUtil.onActionClickListener() {
+            @Override
+            public void action(int viewType, Dialog dialog, View view) {
+                if (viewType == DialogUtil.SURE) {
+                    Bundle bundle = new Bundle();
+                    startActivity(AccountActivity.class, bundle);
+                    dialog.dismiss();
+                } else {
+                    dialog.dismiss();
+                }
+            }
+        }).init().show();
+    }
+
+    private String autoSplitText(final TextView tv) {
+        final String rawText = tv.getText().toString(); //原始文本
+        final Paint tvPaint = tv.getPaint(); //paint，包含字体等信息
+        final float tvWidth = tv.getWidth() - tv.getPaddingLeft() - tv.getPaddingRight(); //控件可用宽度
+
+        //将原始文本按行拆分
+        String[] rawTextLines = rawText.replaceAll("\r", "").split("\n");
+        StringBuilder sbNewText = new StringBuilder();
+        for (String rawTextLine : rawTextLines) {
+            if (tvPaint.measureText(rawTextLine) <= tvWidth) {
+                //如果整行宽度在控件可用宽度之内，就不处理了
+                sbNewText.append(rawTextLine);
+            } else {
+                //如果整行宽度超过控件可用宽度，则按字符测量，在超过可用宽度的前一个字符处手动换行
+                float lineWidth = 0;
+                for (int cnt = 0; cnt != rawTextLine.length(); ++cnt) {
+                    char ch = rawTextLine.charAt(cnt);
+                    lineWidth += tvPaint.measureText(String.valueOf(ch));
+                    if (lineWidth <= tvWidth) {
+                        sbNewText.append(ch);
+                    } else {
+                        sbNewText.append("\n");
+                        lineWidth = 0;
+                        --cnt;
+                    }
+                }
+            }
+            sbNewText.append("\n");
+        }
+
+        //把结尾多余的\n去掉
+        if (!rawText.endsWith("\n")) {
+            sbNewText.deleteCharAt(sbNewText.length() - 1);
+        }
+
+        return sbNewText.toString();
+    }
+}

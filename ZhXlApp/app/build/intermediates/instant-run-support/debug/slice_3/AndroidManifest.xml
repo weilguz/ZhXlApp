@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.idyoga.yoga"
+      android:versionCode="30"
+      android:versionName="v 3.4.3"
+      split="lib_slice_3_apk">
+</manifest>

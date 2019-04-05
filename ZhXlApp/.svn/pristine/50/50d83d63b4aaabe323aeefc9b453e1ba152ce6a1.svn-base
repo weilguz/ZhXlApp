@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="AlivcReporter:@aar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/AlivcReporter/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/AlivcReporter/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

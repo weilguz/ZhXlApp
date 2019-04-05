@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginBottom="0.5dp"
+        android:background="@color/white">
+
+
+        <View
+            android:id="@+id/img"
+            android:layout_width="5dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_mine_tv" />
+        <TextView
+            android:id="@+id/tv_head_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/img"
+            android:text="@string/home_experience_recommend_class"
+            android:textColor="@color/home_experience_font_recommend_class" />
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:textColor="@color/theme_1"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/view_line" />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_view"
+        android:layout_width="match_parent"
+        app:tabMode="scrollable"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/theme_1"
+        android:layout_height="40dp"/>
+    <include layout="@layout/view_line" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#f2f2f2" />
+</LinearLayout>

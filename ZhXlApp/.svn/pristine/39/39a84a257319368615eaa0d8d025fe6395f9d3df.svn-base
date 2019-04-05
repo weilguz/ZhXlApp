@@ -1,0 +1,496 @@
+package com.idyoga.yoga.activity.course;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.activity.lbs.LbsActivity;
+import com.idyoga.yoga.base.BaseActivity;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.comm.Constants;
+import com.idyoga.yoga.common.http.type1.HttpClient;
+import com.idyoga.yoga.common.http.type1.HttpResponseHandler;
+import com.idyoga.yoga.common.modle.PostResult;
+import com.idyoga.yoga.model.ExperienceAppointmentCourseOrder;
+import com.idyoga.yoga.model.ResultBean;
+import com.idyoga.yoga.model.TeamCourseDetailBean;
+import com.idyoga.yoga.utils.CommonUtils;
+import com.idyoga.yoga.utils.DateUtils;
+import com.idyoga.yoga.utils.ToastUtil;
+import com.idyoga.yoga.utils.UserUtil;
+import com.idyoga.yoga.view.YogaLayoutManager;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
+import okhttp3.Call;
+import okhttp3.Request;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+import vip.devkit.library.Logcat;
+import vip.devkit.library.StringUtil;
+
+/**
+ * 文 件 名: AppointmentCourseDetailActivity
+ * 功能描述:
+ * 创 建 人: By k
+ * 邮    箱:vip@devkit.vip
+ * 网    站:www.devkit.vip
+ * 创建日期: 2018/7/19
+ * 版   本: V 1.0
+ * 代码修改:（修改人 - 修改时间）
+ * 修改备注：
+ */
+public class AppointmentCourseDetailActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+    @BindView(R.id.ll_title_back)
+    LinearLayout mLlTitleBack;
+    @BindView(R.id.tv_title_text)
+    TextView mTvTitleText;
+    @BindView(R.id.ll_common_layout)
+    LinearLayout mLlCommonLayout;
+    @BindView(R.id.tv_state)
+    TextView mTvState;
+    @BindView(R.id.tv_time)
+    TextView mTvTime;
+    @BindView(R.id.ll_layout_time)
+    LinearLayout mLlLayoutTime;
+    @BindView(R.id.tv_remarks)
+    TextView mTvRemarks;
+    @BindView(R.id.tv_course_name)
+    TextView mTvCourseName;
+    @BindView(R.id.tv_course_time)
+    TextView mTvCourseTime;
+    @BindView(R.id.tv_tutor_name)
+    TextView mTvTutorName;
+    @BindView(R.id.tv_shop_name)
+    TextView mTvShopName;
+    @BindView(R.id.tv_address)
+    TextView mTvAddress;
+    @BindView(R.id.ll_service)
+    LinearLayout mLlService;
+    @BindView(R.id.tv_sign_state)
+    TextView mTvSignState;
+    @BindView(R.id.iv_qr_code)
+    ImageView mIvQrCode;
+    @BindView(R.id.tv_qr_state)
+    TextView mTvQrState;
+    @BindView(R.id.ll_course_qrCode)
+    LinearLayout mLlCourseQrCode;
+    @BindView(R.id.sv_view)
+    NestedScrollView mSvView;
+    @BindView(R.id.tv_submit)
+    TextView mTvSubmit;
+    @BindView(R.id.srl_Refresh)
+    SwipeRefreshLayout mSrlRefresh;
+    private String courseId, shopId, appointmentId;
+    private ExperienceAppointmentCourseOrder mDetailBean;
+    private CountDownTimer mTimer;
+    private String stateType = "";
+
+    @Override
+    protected void initData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            stateType = bundle.getString("stateType");
+            shopId = bundle.getString("shopId");
+            courseId = bundle.getString("courseId");
+            appointmentId = bundle.getString("appointmentId");
+            Logcat.i("获取到的值：" + shopId + "/" + courseId + "/" + appointmentId + "/" + stateType);
+            getData(courseId);
+        }
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(mLlCommonLayout).init();
+    }
+
+    @Override
+    protected YogaLayoutManager initLayoutManager() {
+        return YogaLayoutManager.wrap(mSvView);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_appnintment_course_detail;
+    }
+
+    @Override
+    protected void initView() {
+        mTvTitleText.setText("预约详情");
+        mLayoutManager.showLoading();
+    }
+
+    /**
+     * @param mCourseDetailBean
+     */
+    private void initViewData(ExperienceAppointmentCourseOrder mCourseDetailBean) {
+        if (mCourseDetailBean == null) {
+            mLayoutManager.showEmpty();
+            return;
+        }
+        this.mDetailBean = mCourseDetailBean;
+        this.mTvCourseName.setText("课程名称：" + mCourseDetailBean.getCourseDetail().getLesson_name() + "");
+        String d = CommonUtils.getDateStringByTimeSTamp((long) mCourseDetailBean.getCourseDetail().getStart_time(), "yyyy年MM月dd日");
+        Logcat.e("上午下午：" + 0 + "/" + getAm_Pm(mCourseDetailBean.getCourseDetail().getStart_time()));
+        d = d + " " + getAm_Pm(mCourseDetailBean.getCourseDetail().getStart_time());
+        d = d + "" + CommonUtils.getDateStringByTimeSTamp((long) mCourseDetailBean.getCourseDetail().getStart_time(), "HH:mm");
+        d = d + "～" + CommonUtils.getDateStringByTimeSTamp((long) mCourseDetailBean.getCourseDetail().getEnd_time(), "HH:mm");
+        mTvCourseTime.setText("上课时间：" + d);
+        mTvTutorName.setText("导师名称：" + mCourseDetailBean.getCourseDetail().getTutor_name());
+        mTvShopName.setText("瑜伽馆：" + mCourseDetailBean.getShopInfo().getName() + "");
+        mTvAddress.setText("地址：" + mCourseDetailBean.getShopInfo().getAddress() + "");
+        int status = mCourseDetailBean.getAppointmentInfo().getStatus();
+        int confirmStatus = mCourseDetailBean.getAppointmentInfo().getConfirm_status();
+//用户发起预约订单（status:0 confirm_status:0）
+//		->店铺拒绝该订单（status:2 confirm_status:2）
+//		->用户自己取消该订单（status:2 confirm_status:3）
+//		->超时自动取消该订单（status:2 confirm_status:4）
+//		->店铺确认订单（status:0 confirm_status:1）
+//		->店铺签到（status:1 confirm_status:1）
+//		->用户取消预约（status:2 confirm_status:1）
+
+        // status  1 已预约  2 已签到  3 已取消
+        // confirm_status 订单确认状态 0：未确认 1：已确认 2：店铺拒绝 3：用户取消 4：自动取消
+        if (status == 0 && confirmStatus == 0) { /**未确认*/
+            mTvState.setText("预约已提交\n请等待瑜伽馆确认");
+            mLlLayoutTime.setVisibility(View.VISIBLE);
+            mTvRemarks.setVisibility(View.VISIBLE);
+            mLlCourseQrCode.setVisibility(View.GONE);
+            mTvSubmit.setVisibility(View.VISIBLE);
+            long time = mDetailBean.getAppointmentInfo().getConfirm_expire_time() - mDetailBean.getNow();
+            Logcat.i("time:" + time + "/" + (time / 1000 / 60) + "/" + System.currentTimeMillis() / 1000 + "/" + mDetailBean.getAppointmentInfo().getConfirm_expire_time());
+//            initDownTimer(time * 1000);
+        } else if (status == 0 && confirmStatus == 1) {/**已确认*/
+            Glide.with(this).load(mCourseDetailBean.getQrCode()).placeholder(R.drawable.img_course)
+                    .error(R.drawable.img_course).into(mIvQrCode);
+            mTvState.setText("瑜伽馆已确认\n请按时前往瑜伽馆上课");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setText("注：开课前" + mDetailBean.getCourseDetail().getCancel_use_time() + "分钟内不能取消预约");
+            mTvRemarks.setVisibility(View.VISIBLE);
+            mLlCourseQrCode.setVisibility(View.VISIBLE);
+            mTvSubmit.setVisibility(View.VISIBLE);
+        } else if (status == 2 && confirmStatus == 2) {
+            mTvState.setText("协商失败\n预约已取消");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setVisibility(View.GONE);
+            mLlCourseQrCode.setVisibility(View.GONE);
+            mTvSubmit.setVisibility(View.GONE);
+        } else if (status == 2 && confirmStatus == 1 || status == 2 && confirmStatus == 3) {
+            mTvState.setText("您已成功取消预约");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setVisibility(View.GONE);
+            mLlCourseQrCode.setVisibility(View.GONE);
+            mTvSubmit.setVisibility(View.GONE);
+        } else if (status == 2 && confirmStatus == 4) {
+            mTvState.setText("超过确定时间\n预约已自动取消");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setVisibility(View.GONE);
+            mLlCourseQrCode.setVisibility(View.GONE);
+            mTvSubmit.setVisibility(View.GONE);
+        } else if (status == 1 && confirmStatus == 1) {
+            mTvState.setText("您已成功签到");
+            mTvSignState.setText("已签到");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setVisibility(View.GONE);
+            mLlCourseQrCode.setVisibility(View.VISIBLE);
+            mIvQrCode.setImageResource(R.drawable.icon_course_study);
+            mTvSubmit.setVisibility(View.GONE);
+        }
+        if (stateType.equals("3") && status != 1 && confirmStatus == 1) {
+            mTvState.setText("你还未签到");
+            mTvSignState.setText("签到二维码");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setVisibility(View.GONE);
+            mLlCourseQrCode.setVisibility(View.VISIBLE);
+            mTvQrState.setVisibility(View.VISIBLE);
+            mIvQrCode.setVisibility(View.GONE);
+            mTvSubmit.setVisibility(View.GONE);
+        }
+        if (mDetailBean.getCourseDetail().getStart_time() < System.currentTimeMillis() / 1000 && status == 0 && confirmStatus == 0) {
+            mTvState.setText("已过上课时间，课程自动取消\n如需要，请重新预约或预约其他课程");
+            mLlLayoutTime.setVisibility(View.GONE);
+            mTvRemarks.setVisibility(View.GONE);
+            mLlCourseQrCode.setVisibility(View.GONE);
+            mTvSubmit.setVisibility(View.GONE);
+        }
+        mTvRemarks.setVisibility(View.GONE);
+        mLlLayoutTime.setVisibility(View.GONE);
+        mLayoutManager.showContent();
+    }
+
+
+    /**
+     * 预计瑜伽馆确认时间  到倒计时
+     *
+     * @param time
+     */
+    private void initDownTimer(long time) {
+        Logcat.i("秒：" + time);
+        //            long time = 40 * 60 * 1000;
+        mTimer = new CountDownTimer(time, 1000) {
+            @Override
+            public void onTick(long l) {
+//                Logcat.i("\n值：" + l + " \n 百分比：" + (100 - ((int) (l / 1000) * 100 / 180)) + "\n剩余时间：" + (int) (l / 1000) + "/" + DateUtils.secondToTime2((int) (l / 1000)));
+                if (mTvTime != null && !StringUtil.isEmpty(DateUtils.secondToTime2((int) (l / 1000)))) {
+                    mTvTime.setText(DateUtils.secondToTime2((int) (l / 1000)));
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                Logcat.e("自动取消了");
+            }
+        }.start();
+    }
+
+    @Override
+    protected void setListener() {
+        mSrlRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (mTimer != null) {
+                    mTimer.cancel();
+                    mTimer.onFinish();
+                    mTvTime.setText("");
+                }
+                getData(courseId);
+                mSrlRefresh.setRefreshing(false);
+            }
+        });
+        mSvView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollX == 0) {
+                    mSrlRefresh.setEnabled(true);
+                } else {
+                    mSrlRefresh.setEnabled(false);
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        EventBus.getDefault().post(new PostResult("600", "s"));
+        finish();
+    }
+
+    /**
+     * 请求CAMERA权限码
+     */
+    public static final int REQUEST_CAMERA_PERM = 101;
+
+    @AfterPermissionGranted(REQUEST_CAMERA_PERM)
+    @OnClick({R.id.ll_title_back, R.id.tv_address, R.id.ll_service, R.id.tv_submit})
+    public void onViewClicked(View view) {
+        Bundle bundle;
+        switch (view.getId()) {
+            case R.id.ll_title_back:
+                if (mTimer != null) {
+                    mTimer.cancel();
+                    mTimer.onFinish();
+                }
+                EventBus.getDefault().post(new PostResult("600", "s"));
+                finish();
+                break;
+            case R.id.tv_address:
+                bundle = new Bundle();
+//                if (mDetailBean != null && mDetailBean.getShopInfo() != null) {
+//                    bundle.putString("address", mDetailBean.getShopInfo().getAddress());
+//                    bundle.putString("latitude", mDetailBean.getShopInfo().getLatitude());
+//                    bundle.putString("longitude", mDetailBean.getParentShopInfo().getLongitude());
+//                    bundle.putString("shopName", mDetailBean.getParentShopInfo().getName());
+//                    bundle.putString("shopAddress", mDetailBean.getShopInfo().getAddress());
+//                    startActivity(LbsActivity.class, bundle);
+//                }
+                break;
+            case R.id.ll_service:
+                if (mDetailBean != null) {
+                    initPermission();
+                    callPhone(Constants.SERVICE_TELL);
+                }
+                break;
+            case R.id.tv_submit:
+                showLoading("取消处理中...");
+                int status = mDetailBean.getAppointmentInfo().getConfirm_status();
+                cancelCourse(status, mDetailBean.getAppointmentInfo().getId() + "", mDetailBean.getAppointmentInfo()
+                        .getShop_id() + "");
+                break;
+        }
+    }
+
+    private void getData(String courseId) {
+        Map map = new HashMap();
+        map.put("token", UserUtil.getUserBean(this).getToken() + "");
+        map.put("appointmentId", appointmentId + "");
+        map.put("shopId", shopId + "");
+        Logcat.e("提交的数据：" + map.toString() + "/" + ApiConstants.Urls.APPOINTMENT_ORDER_DETAIL);
+        OkHttpUtils.post().url(ApiConstants.Urls.APPOINTMENT_ORDER_DETAIL).params(map).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Logcat.e("Exception返回的数据：" + e);
+                mLayoutManager.showNetError();
+                dismissLoading();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                dismissLoading();
+                Logcat.e("返回的数据：" + response);
+                ResultBean bean = JSON.parseObject(response, ResultBean.class);
+                if (bean.getCode().equals("1")) {
+                    ExperienceAppointmentCourseOrder object = JSON.parseObject(bean.getData(), ExperienceAppointmentCourseOrder.class);
+                    if (object != null) {
+                        initViewData(object);
+                    }
+                } else {
+                    ToastUtil.showToast(bean.getMsg());
+                }
+            }
+        });
+    }
+
+    /**
+     * @param status
+     * @param orderId
+     * @param shopId
+     */
+    private void cancelCourse(int status, String orderId, String shopId) {
+        Map map = new HashMap();
+        map.put("userId", UserUtil.getUserBean(this).getId() + "");
+        map.put("token", UserUtil.getUserBean(this).getToken() + "");
+        map.put("appointmentId", orderId + "");
+        map.put("shopId", shopId + "");
+        map.put("isUser", "1");
+        String url = ApiConstants.Urls.USER_CANCEL_COURSE_V2_1;
+        if (status == 0) {
+            url = ApiConstants.Urls.USER_CANCEL_COURSE_V2_2;
+        }
+        Logcat.e("提交的参数：" + map.toString() + "/" + status);
+        HttpClient.post(url, map, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, String content) {
+                super.onSuccess(statusCode, content);
+                dismissLoading();
+                Logcat.e("取消预定课程：" + content);
+                ResultBean resultBean = JSON.parseObject(content, ResultBean.class);
+                if (resultBean.getCode().equals("1")) {
+                    ToastUtil.showToast("取消成功");
+                    EventBus.getDefault().post(new PostResult("600", "刷新课程内容"));
+                    showLoading("刷新中...");
+                    getData(courseId);
+                } else {
+                    ToastUtil.showToast(resultBean.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 请求CALL权限码
+     */
+    public static final int REQUEST_CALL_PERM = 101;
+
+    @AfterPermissionGranted(REQUEST_CALL_PERM)
+    private void callPhone(String mobile) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Intent phoneIntent = new Intent("android.intent.action.CALL",
+                    Uri.parse("tel:" + mobile));
+            startActivity(phoneIntent);
+        } else {
+            if (EasyPermissions.hasPermissions(this, Manifest.permission.CALL_PHONE)) {
+                Intent phoneIntent = new Intent("android.intent.action.CALL",
+                        Uri.parse("tel:" + mobile));
+                startActivity(phoneIntent);
+            }
+        }
+    }
+
+    private static String[] permissions = new String[]{Manifest.permission.CALL_PHONE};
+
+    void initPermission() {
+        for (String permission : permissions) {
+            int checkSelfPermission = ContextCompat.checkSelfPermission(this, permission);
+            if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {//未申请
+                ActivityCompat.requestPermissions(this, permissions, 100);
+                Logcat.i("initPermission:1");
+            }
+        }
+        Logcat.i("initPermission:2");
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        Logcat.i("执行onPermissionsGranted()...");
+        callPhone(Constants.SERVICE_TELL);
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        ToastUtil.showToast("去开启APP拨打电话权限");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer.onFinish();
+        }
+    }
+
+    /**
+     * @param s
+     * @return 获取上午、中午 晚上、
+     */
+    public String getAm_Pm(int s) {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis((long) s);
+        int apm = calendar.get(Calendar.AM_PM);// 0 上午/1 下午
+        int hours = Integer.valueOf(CommonUtils.getDateStringByTimeSTamp((long) s, "HH"));
+        if (hours < 11) {
+            return "早上";
+        } else if (hours < 13) {
+            return "中午";
+        } else if (hours < 18) {
+            return "下午";
+        } else if (hours < 24) {
+            return "下午";
+        } else {
+            return "";
+        }
+    }
+}

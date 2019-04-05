@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="common.share-1.1.3">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/common.share-1.1.3.aar/afa1b7adf11d27cfa7723a10b97f2011/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/common.share-1.1.3.aar/afa1b7adf11d27cfa7723a10b97f2011/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/common.share-1.1.3.aar/afa1b7adf11d27cfa7723a10b97f2011/jars/libs/open_sdk_r5990_lite.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/common.share-1.1.3.aar/afa1b7adf11d27cfa7723a10b97f2011/jars/libs/weiboSDKCore_3.1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/vip.devkit/common.share/1.1.3/3b37ef7d8ad406d681179202f82acee3f64f6d05/common.share-1.1.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

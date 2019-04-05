@@ -1,0 +1,52 @@
+package com.idyoga.yoga.fragment;
+
+import android.view.View;
+import android.widget.Button;
+
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.activity.video.VodModeActivity;
+import com.idyoga.yoga.base.BaseFragment;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+/**
+ * 作者 by K
+ * 时间：on 2017/8/29 14:36
+ * 邮箱 by  vip@devkit.vip
+ * <p/>
+ * 类用途：
+ * 最后修改： 积分商城
+ */
+public class CreditFragment extends BaseFragment {
+    String mUrl = "http://player.alicdn.com/video/aliyunmedia.mp4";
+    int flag = 0;
+
+    @Override
+    protected boolean isImmersionBarEnabled() {
+        return false;
+    }
+
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.fragment_video;
+    }
+
+    @Override
+    protected void initView(View view) {
+        super.initView(view);
+    }
+
+    @Override
+    protected void setListener() {
+        super.setListener();
+        if (flag == 0) {
+        } else if (flag == 1) {
+        }
+        flag = (flag + 1) % 2;//其余得到循环执行上面2个不同的功能
+    }
+
+
+}

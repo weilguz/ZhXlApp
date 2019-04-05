@@ -1,0 +1,109 @@
+package com.idyoga.yoga.activity.setting;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.github.lzyzsd.jsbridge.BridgeWebView;
+import com.idyoga.yoga.R;
+import com.idyoga.yoga.activity.web.BaseWebActivity;
+import com.idyoga.yoga.comm.ApiConstants;
+import com.idyoga.yoga.common.yogaweb.AgentWeb;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import vip.devkit.library.AppUtils;
+import vip.devkit.library.Logcat;
+
+/**
+ * 文 件 名: TestUploadFileActivity
+ * 功能描述:
+ * 创 建 人: By k
+ * 邮    箱:vip@devkit.vip
+ * 网    站:www.devkit.vip
+ * 创建日期: 2018/6/12
+ * 版   本: V 1.0
+ * 代码修改:（修改人 - 修改时间）
+ * 修改备注：
+ */
+public class AboutActivity extends BaseWebActivity {
+    @BindView(R.id.ll_title_back)
+    LinearLayout mLlTitleBack;
+    @BindView(R.id.tv_title_text)
+    TextView mTvTitleText;
+    @BindView(R.id.tv_title_right)
+    TextView mTvTitleRight;
+    @BindView(R.id.ll_title_right)
+    LinearLayout mLlTitleRight;
+    @BindView(R.id.ll_common_layout)
+    LinearLayout mLlCommonLayout;
+    @BindView(R.id.ll_web_layout)
+    LinearLayout mLlWebLayout;
+
+    @NonNull
+    @Override
+    protected ViewGroup getAgentWebParent() {
+        return mLlWebLayout;
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(mLlCommonLayout).init();
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_web;
+    }
+
+    @Override
+    protected void initView() {
+        mTvTitleText.setText("关于我们");
+        mBridgeWebView = new BridgeWebView(this);
+        mAgentWeb = AgentWeb.with(this)//
+                .setAgentWebParent(getAgentWebParent(), new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))//
+                .closeIndicator()
+                .setAgentWebWebSettings(getAgentWebSettings())
+                .setWebViewClient(getWebViewClient())
+                .setWebChromeClient(getWebChromeClient())
+                .setSecurityType(AgentWeb.SecurityType.DEFAULT_CHECK)
+                .createAgentWeb()//
+                .ready()//
+                .go(getUrl());
+        Logcat.i("URI:" + getUrl());
+    }
+
+    @Override
+    protected void setListener() {
+
+    }
+
+    @Nullable
+    @Override
+    protected String getUrl() {
+        return ApiConstants.Html5Urls.SETTING_ABOUT_APP + "?v=" + AppUtils.getAppVersionName(this, this.getPackageName()) + "&osType=" + "android&appType=" + 2;
+    }
+
+
+    @OnClick({R.id.ll_title_back, R.id.ll_web_layout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_title_back:
+                finish();
+                break;
+            case R.id.ll_web_layout:
+                break;
+        }
+    }
+}
