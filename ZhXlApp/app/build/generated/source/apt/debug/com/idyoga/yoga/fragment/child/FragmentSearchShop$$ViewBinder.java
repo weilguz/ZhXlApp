@@ -14,10 +14,10 @@ public class FragmentSearchShop$$ViewBinder<T extends FragmentSearchShop> implem
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
-    view = finder.findRequiredView(source, 2131231467, "field 'mSrlRefresh'");
-    target.mSrlRefresh = finder.castView(view, 2131231467, "field 'mSrlRefresh'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231470, "field 'mSrlRefresh'");
+    target.mSrlRefresh = finder.castView(view, 2131231470, "field 'mSrlRefresh'");
     return unbinder;
   }
 

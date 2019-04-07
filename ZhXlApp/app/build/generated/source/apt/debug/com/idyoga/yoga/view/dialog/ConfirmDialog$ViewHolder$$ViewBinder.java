@@ -14,10 +14,10 @@ public class ConfirmDialog$ViewHolder$$ViewBinder<T extends ConfirmDialog.ViewHo
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231661, "field 'mTvMsg'");
-    target.mTvMsg = finder.castView(view, 2131231661, "field 'mTvMsg'");
-    view = finder.findRequiredView(source, 2131231517, "field 'mTvSure'");
-    target.mTvSure = finder.castView(view, 2131231517, "field 'mTvSure'");
+    view = finder.findRequiredView(source, 2131231664, "field 'mTvMsg'");
+    target.mTvMsg = finder.castView(view, 2131231664, "field 'mTvMsg'");
+    view = finder.findRequiredView(source, 2131231520, "field 'mTvSure'");
+    target.mTvSure = finder.castView(view, 2131231520, "field 'mTvSure'");
     return unbinder;
   }
 

@@ -15,8 +15,55 @@ public class ShopOfflineCourseActivity$$ViewBinder<T extends ShopOfflineCourseAc
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231199, "field 'mLlTitleBack' and method 'onViewClicked'");
-    target.mLlTitleBack = finder.castView(view, 2131231199, "field 'mLlTitleBack'");
+    view = finder.findRequiredView(source, 2131231202, "field 'mLlTitleBack' and method 'onViewClicked'");
+    target.mLlTitleBack = finder.castView(view, 2131231202, "field 'mLlTitleBack'");
+    unbinder.view2131231202 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.onViewClicked(p0);
+      }
+    });
+    view = finder.findRequiredView(source, 2131231757, "field 'mTvTitleText'");
+    target.mTvTitleText = finder.castView(view, 2131231757, "field 'mTvTitleText'");
+    view = finder.findRequiredView(source, 2131231756, "field 'mTvTitleRight'");
+    target.mTvTitleRight = finder.castView(view, 2131231756, "field 'mTvTitleRight'");
+    view = finder.findRequiredView(source, 2131231203, "field 'mLlTitleRight'");
+    target.mLlTitleRight = finder.castView(view, 2131231203, "field 'mLlTitleRight'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mLlCommonLayout'");
+    target.mLlCommonLayout = finder.castView(view, 2131231136, "field 'mLlCommonLayout'");
+    view = finder.findRequiredView(source, 2131231739, "field 'mTvTagA'");
+    target.mTvTagA = finder.castView(view, 2131231739, "field 'mTvTagA'");
+    view = finder.findRequiredView(source, 2131231076, "field 'mIvTagA'");
+    target.mIvTagA = finder.castView(view, 2131231076, "field 'mIvTagA'");
+    view = finder.findRequiredView(source, 2131231197, "field 'mLlTagA' and method 'onViewClicked'");
+    target.mLlTagA = finder.castView(view, 2131231197, "field 'mLlTagA'");
+    unbinder.view2131231197 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.onViewClicked(p0);
+      }
+    });
+    view = finder.findRequiredView(source, 2131231740, "field 'mTvTagB'");
+    target.mTvTagB = finder.castView(view, 2131231740, "field 'mTvTagB'");
+    view = finder.findRequiredView(source, 2131231077, "field 'mIvTagB'");
+    target.mIvTagB = finder.castView(view, 2131231077, "field 'mIvTagB'");
+    view = finder.findRequiredView(source, 2131231198, "field 'mLlTagB' and method 'onViewClicked'");
+    target.mLlTagB = finder.castView(view, 2131231198, "field 'mLlTagB'");
+    unbinder.view2131231198 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.onViewClicked(p0);
+      }
+    });
+    view = finder.findRequiredView(source, 2131231741, "field 'mTvTagC'");
+    target.mTvTagC = finder.castView(view, 2131231741, "field 'mTvTagC'");
+    view = finder.findRequiredView(source, 2131231078, "field 'mIvTagC'");
+    target.mIvTagC = finder.castView(view, 2131231078, "field 'mIvTagC'");
+    view = finder.findRequiredView(source, 2131231199, "field 'mLlTagC' and method 'onViewClicked'");
+    target.mLlTagC = finder.castView(view, 2131231199, "field 'mLlTagC'");
     unbinder.view2131231199 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
@@ -24,57 +71,10 @@ public class ShopOfflineCourseActivity$$ViewBinder<T extends ShopOfflineCourseAc
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231754, "field 'mTvTitleText'");
-    target.mTvTitleText = finder.castView(view, 2131231754, "field 'mTvTitleText'");
-    view = finder.findRequiredView(source, 2131231753, "field 'mTvTitleRight'");
-    target.mTvTitleRight = finder.castView(view, 2131231753, "field 'mTvTitleRight'");
-    view = finder.findRequiredView(source, 2131231200, "field 'mLlTitleRight'");
-    target.mLlTitleRight = finder.castView(view, 2131231200, "field 'mLlTitleRight'");
-    view = finder.findRequiredView(source, 2131231133, "field 'mLlCommonLayout'");
-    target.mLlCommonLayout = finder.castView(view, 2131231133, "field 'mLlCommonLayout'");
-    view = finder.findRequiredView(source, 2131231736, "field 'mTvTagA'");
-    target.mTvTagA = finder.castView(view, 2131231736, "field 'mTvTagA'");
-    view = finder.findRequiredView(source, 2131231073, "field 'mIvTagA'");
-    target.mIvTagA = finder.castView(view, 2131231073, "field 'mIvTagA'");
-    view = finder.findRequiredView(source, 2131231194, "field 'mLlTagA' and method 'onViewClicked'");
-    target.mLlTagA = finder.castView(view, 2131231194, "field 'mLlTagA'");
-    unbinder.view2131231194 = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.onViewClicked(p0);
-      }
-    });
-    view = finder.findRequiredView(source, 2131231737, "field 'mTvTagB'");
-    target.mTvTagB = finder.castView(view, 2131231737, "field 'mTvTagB'");
-    view = finder.findRequiredView(source, 2131231074, "field 'mIvTagB'");
-    target.mIvTagB = finder.castView(view, 2131231074, "field 'mIvTagB'");
-    view = finder.findRequiredView(source, 2131231195, "field 'mLlTagB' and method 'onViewClicked'");
-    target.mLlTagB = finder.castView(view, 2131231195, "field 'mLlTagB'");
-    unbinder.view2131231195 = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.onViewClicked(p0);
-      }
-    });
-    view = finder.findRequiredView(source, 2131231738, "field 'mTvTagC'");
-    target.mTvTagC = finder.castView(view, 2131231738, "field 'mTvTagC'");
-    view = finder.findRequiredView(source, 2131231075, "field 'mIvTagC'");
-    target.mIvTagC = finder.castView(view, 2131231075, "field 'mIvTagC'");
-    view = finder.findRequiredView(source, 2131231196, "field 'mLlTagC' and method 'onViewClicked'");
-    target.mLlTagC = finder.castView(view, 2131231196, "field 'mLlTagC'");
-    unbinder.view2131231196 = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.onViewClicked(p0);
-      }
-    });
-    view = finder.findRequiredView(source, 2131231467, "field 'mRefreshLayout'");
-    target.mRefreshLayout = finder.castView(view, 2131231467, "field 'mRefreshLayout'");
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231470, "field 'mRefreshLayout'");
+    target.mRefreshLayout = finder.castView(view, 2131231470, "field 'mRefreshLayout'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
     return unbinder;
   }
 
@@ -85,13 +85,13 @@ public class ShopOfflineCourseActivity$$ViewBinder<T extends ShopOfflineCourseAc
   protected static class InnerUnbinder<T extends ShopOfflineCourseActivity> implements Unbinder {
     private T target;
 
+    View view2131231202;
+
+    View view2131231197;
+
+    View view2131231198;
+
     View view2131231199;
-
-    View view2131231194;
-
-    View view2131231195;
-
-    View view2131231196;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -105,7 +105,7 @@ public class ShopOfflineCourseActivity$$ViewBinder<T extends ShopOfflineCourseAc
     }
 
     protected void unbind(T target) {
-      view2131231199.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
       target.mLlTitleBack = null;
       target.mTvTitleText = null;
       target.mTvTitleRight = null;
@@ -113,15 +113,15 @@ public class ShopOfflineCourseActivity$$ViewBinder<T extends ShopOfflineCourseAc
       target.mLlCommonLayout = null;
       target.mTvTagA = null;
       target.mIvTagA = null;
-      view2131231194.setOnClickListener(null);
+      view2131231197.setOnClickListener(null);
       target.mLlTagA = null;
       target.mTvTagB = null;
       target.mIvTagB = null;
-      view2131231195.setOnClickListener(null);
+      view2131231198.setOnClickListener(null);
       target.mLlTagB = null;
       target.mTvTagC = null;
       target.mIvTagC = null;
-      view2131231196.setOnClickListener(null);
+      view2131231199.setOnClickListener(null);
       target.mLlTagC = null;
       target.mRefreshLayout = null;
       target.mRvList = null;

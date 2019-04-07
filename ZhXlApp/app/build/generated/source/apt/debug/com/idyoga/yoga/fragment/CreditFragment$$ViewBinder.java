@@ -15,26 +15,26 @@ public class CreditFragment$$ViewBinder<T extends CreditFragment> implements Vie
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231209, "field 'llWebRoot'");
-    target.llWebRoot = finder.castView(view, 2131231209, "field 'llWebRoot'");
-    view = finder.findRequiredView(source, 2131231162, "field 'llLeftBack' and method 'onViewClicked'");
-    target.llLeftBack = finder.castView(view, 2131231162, "field 'llLeftBack'");
-    unbinder.view2131231162 = view;
+    view = finder.findRequiredView(source, 2131231212, "field 'llWebRoot'");
+    target.llWebRoot = finder.castView(view, 2131231212, "field 'llWebRoot'");
+    view = finder.findRequiredView(source, 2131231165, "field 'llLeftBack' and method 'onViewClicked'");
+    target.llLeftBack = finder.castView(view, 2131231165, "field 'llLeftBack'");
+    unbinder.view2131231165 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231751, "field 'tvTitle'");
-    target.tvTitle = finder.castView(view, 2131231751, "field 'tvTitle'");
-    view = finder.findRequiredView(source, 2131231372, "field 'rlTitle'");
-    target.rlTitle = finder.castView(view, 2131231372, "field 'rlTitle'");
-    view = finder.findRequiredView(source, 2131231786, "field 'mVLayoutHead'");
+    view = finder.findRequiredView(source, 2131231754, "field 'tvTitle'");
+    target.tvTitle = finder.castView(view, 2131231754, "field 'tvTitle'");
+    view = finder.findRequiredView(source, 2131231375, "field 'rlTitle'");
+    target.rlTitle = finder.castView(view, 2131231375, "field 'rlTitle'");
+    view = finder.findRequiredView(source, 2131231789, "field 'mVLayoutHead'");
     target.mVLayoutHead = view;
-    view = finder.findRequiredView(source, 2131231163, "field 'mLlClose' and method 'onViewClicked'");
-    target.mLlClose = finder.castView(view, 2131231163, "field 'mLlClose'");
-    unbinder.view2131231163 = view;
+    view = finder.findRequiredView(source, 2131231166, "field 'mLlClose' and method 'onViewClicked'");
+    target.mLlClose = finder.castView(view, 2131231166, "field 'mLlClose'");
+    unbinder.view2131231166 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -51,9 +51,9 @@ public class CreditFragment$$ViewBinder<T extends CreditFragment> implements Vie
   protected static class InnerUnbinder<T extends CreditFragment> implements Unbinder {
     private T target;
 
-    View view2131231162;
+    View view2131231165;
 
-    View view2131231163;
+    View view2131231166;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -68,12 +68,12 @@ public class CreditFragment$$ViewBinder<T extends CreditFragment> implements Vie
 
     protected void unbind(T target) {
       target.llWebRoot = null;
-      view2131231162.setOnClickListener(null);
+      view2131231165.setOnClickListener(null);
       target.llLeftBack = null;
       target.tvTitle = null;
       target.rlTitle = null;
       target.mVLayoutHead = null;
-      view2131231163.setOnClickListener(null);
+      view2131231166.setOnClickListener(null);
       target.mLlClose = null;
     }
   }

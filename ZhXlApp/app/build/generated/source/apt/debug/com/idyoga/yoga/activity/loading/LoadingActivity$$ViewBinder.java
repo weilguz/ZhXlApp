@@ -15,11 +15,11 @@ public class LoadingActivity$$ViewBinder<T extends LoadingActivity> implements V
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131230969, "field 'guideVp'");
-    target.guideVp = finder.castView(view, 2131230969, "field 'guideVp'");
-    view = finder.findRequiredView(source, 2131230968, "field 'guideIv' and method 'onViewClicked'");
-    target.guideIv = finder.castView(view, 2131230968, "field 'guideIv'");
-    unbinder.view2131230968 = view;
+    view = finder.findRequiredView(source, 2131230970, "field 'guideVp'");
+    target.guideVp = finder.castView(view, 2131230970, "field 'guideVp'");
+    view = finder.findRequiredView(source, 2131230969, "field 'guideIv' and method 'onViewClicked'");
+    target.guideIv = finder.castView(view, 2131230969, "field 'guideIv'");
+    unbinder.view2131230969 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -36,7 +36,7 @@ public class LoadingActivity$$ViewBinder<T extends LoadingActivity> implements V
   protected static class InnerUnbinder<T extends LoadingActivity> implements Unbinder {
     private T target;
 
-    View view2131230968;
+    View view2131230969;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -51,7 +51,7 @@ public class LoadingActivity$$ViewBinder<T extends LoadingActivity> implements V
 
     protected void unbind(T target) {
       target.guideVp = null;
-      view2131230968.setOnClickListener(null);
+      view2131230969.setOnClickListener(null);
       target.guideIv = null;
     }
   }

@@ -15,17 +15,17 @@ public class WelcomeActivity$$ViewBinder<T extends WelcomeActivity> implements V
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231001, "field 'ivBack' and method 'onViewClicked'");
-    target.ivBack = finder.castView(view, 2131231001, "field 'ivBack'");
-    unbinder.view2131231001 = view;
+    view = finder.findRequiredView(source, 2131231004, "field 'ivBack' and method 'onViewClicked'");
+    target.ivBack = finder.castView(view, 2131231004, "field 'ivBack'");
+    unbinder.view2131231004 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked();
       }
     });
-    view = finder.findRequiredView(source, 2131231024, "field 'ivHead'");
-    target.ivHead = finder.castView(view, 2131231024, "field 'ivHead'");
+    view = finder.findRequiredView(source, 2131231027, "field 'ivHead'");
+    target.ivHead = finder.castView(view, 2131231027, "field 'ivHead'");
     return unbinder;
   }
 
@@ -36,7 +36,7 @@ public class WelcomeActivity$$ViewBinder<T extends WelcomeActivity> implements V
   protected static class InnerUnbinder<T extends WelcomeActivity> implements Unbinder {
     private T target;
 
-    View view2131231001;
+    View view2131231004;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -50,7 +50,7 @@ public class WelcomeActivity$$ViewBinder<T extends WelcomeActivity> implements V
     }
 
     protected void unbind(T target) {
-      view2131231001.setOnClickListener(null);
+      view2131231004.setOnClickListener(null);
       target.ivBack = null;
       target.ivHead = null;
     }

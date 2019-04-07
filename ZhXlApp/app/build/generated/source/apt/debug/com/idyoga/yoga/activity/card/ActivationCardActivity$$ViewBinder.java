@@ -15,9 +15,9 @@ public class ActivationCardActivity$$ViewBinder<T extends ActivationCardActivity
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231001, "field 'ivBack' and method 'onViewClicked'");
-    target.ivBack = finder.castView(view, 2131231001, "field 'ivBack'");
-    unbinder.view2131231001 = view;
+    view = finder.findRequiredView(source, 2131231004, "field 'ivBack' and method 'onViewClicked'");
+    target.ivBack = finder.castView(view, 2131231004, "field 'ivBack'");
+    unbinder.view2131231004 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -37,8 +37,8 @@ public class ActivationCardActivity$$ViewBinder<T extends ActivationCardActivity
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231179, "field 'mLlRoot'");
-    target.mLlRoot = finder.castView(view, 2131231179, "field 'mLlRoot'");
+    view = finder.findRequiredView(source, 2131231182, "field 'mLlRoot'");
+    target.mLlRoot = finder.castView(view, 2131231182, "field 'mLlRoot'");
     return unbinder;
   }
 
@@ -49,7 +49,7 @@ public class ActivationCardActivity$$ViewBinder<T extends ActivationCardActivity
   protected static class InnerUnbinder<T extends ActivationCardActivity> implements Unbinder {
     private T target;
 
-    View view2131231001;
+    View view2131231004;
 
     View view2131230802;
 
@@ -65,7 +65,7 @@ public class ActivationCardActivity$$ViewBinder<T extends ActivationCardActivity
     }
 
     protected void unbind(T target) {
-      view2131231001.setOnClickListener(null);
+      view2131231004.setOnClickListener(null);
       target.ivBack = null;
       target.etCardNum = null;
       target.etActivCode = null;

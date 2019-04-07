@@ -15,13 +15,13 @@ public class FragmentExperienceB$$ViewBinder<T extends FragmentExperienceB> impl
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231467, "field 'mRefreshLayout'");
-    target.mRefreshLayout = finder.castView(view, 2131231467, "field 'mRefreshLayout'");
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
-    view = finder.findRequiredView(source, 2131231083, "field 'mIvTop' and method 'onViewClicked'");
-    target.mIvTop = finder.castView(view, 2131231083, "field 'mIvTop'");
-    unbinder.view2131231083 = view;
+    view = finder.findRequiredView(source, 2131231470, "field 'mRefreshLayout'");
+    target.mRefreshLayout = finder.castView(view, 2131231470, "field 'mRefreshLayout'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231086, "field 'mIvTop' and method 'onViewClicked'");
+    target.mIvTop = finder.castView(view, 2131231086, "field 'mIvTop'");
+    unbinder.view2131231086 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -38,7 +38,7 @@ public class FragmentExperienceB$$ViewBinder<T extends FragmentExperienceB> impl
   protected static class InnerUnbinder<T extends FragmentExperienceB> implements Unbinder {
     private T target;
 
-    View view2131231083;
+    View view2131231086;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -54,7 +54,7 @@ public class FragmentExperienceB$$ViewBinder<T extends FragmentExperienceB> impl
     protected void unbind(T target) {
       target.mRefreshLayout = null;
       target.mRvList = null;
-      view2131231083.setOnClickListener(null);
+      view2131231086.setOnClickListener(null);
       target.mIvTop = null;
     }
   }

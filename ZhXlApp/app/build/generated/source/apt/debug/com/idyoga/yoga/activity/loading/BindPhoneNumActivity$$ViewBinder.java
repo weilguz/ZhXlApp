@@ -15,17 +15,17 @@ public class BindPhoneNumActivity$$ViewBinder<T extends BindPhoneNumActivity> im
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231001, "field 'ivBack' and method 'onViewClicked'");
-    target.ivBack = finder.castView(view, 2131231001, "field 'ivBack'");
-    unbinder.view2131231001 = view;
+    view = finder.findRequiredView(source, 2131231004, "field 'ivBack' and method 'onViewClicked'");
+    target.ivBack = finder.castView(view, 2131231004, "field 'ivBack'");
+    unbinder.view2131231004 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231751, "field 'tvTitle'");
-    target.tvTitle = finder.castView(view, 2131231751, "field 'tvTitle'");
+    view = finder.findRequiredView(source, 2131231754, "field 'tvTitle'");
+    target.tvTitle = finder.castView(view, 2131231754, "field 'tvTitle'");
     view = finder.findRequiredView(source, 2131230938, "field 'etPhoneNum'");
     target.etPhoneNum = finder.castView(view, 2131230938, "field 'etPhoneNum'");
     view = finder.findRequiredView(source, 2131230811, "field 'btnGetCode' and method 'onViewClicked'");
@@ -58,7 +58,7 @@ public class BindPhoneNumActivity$$ViewBinder<T extends BindPhoneNumActivity> im
   protected static class InnerUnbinder<T extends BindPhoneNumActivity> implements Unbinder {
     private T target;
 
-    View view2131231001;
+    View view2131231004;
 
     View view2131230811;
 
@@ -76,7 +76,7 @@ public class BindPhoneNumActivity$$ViewBinder<T extends BindPhoneNumActivity> im
     }
 
     protected void unbind(T target) {
-      view2131231001.setOnClickListener(null);
+      view2131231004.setOnClickListener(null);
       target.ivBack = null;
       target.tvTitle = null;
       target.etPhoneNum = null;

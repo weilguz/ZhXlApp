@@ -14,8 +14,8 @@ public class PileAvertView$$ViewBinder<T extends PileAvertView> implements ViewB
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231282, "field 'pileView'");
-    target.pileView = finder.castView(view, 2131231282, "field 'pileView'");
+    view = finder.findRequiredView(source, 2131231285, "field 'pileView'");
+    target.pileView = finder.castView(view, 2131231285, "field 'pileView'");
     return unbinder;
   }
 

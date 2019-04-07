@@ -15,24 +15,24 @@ public class HomeFragment$$ViewBinder<T extends HomeFragment> implements ViewBin
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231180, "field 'mLlHomeTitle'");
-    target.mLlHomeTitle = finder.castView(view, 2131231180, "field 'mLlHomeTitle'");
-    view = finder.findRequiredView(source, 2131230997, "field 'mIvAddress'");
-    target.mIvAddress = finder.castView(view, 2131230997, "field 'mIvAddress'");
-    view = finder.findRequiredView(source, 2131231055, "field 'mIcSearch' and method 'onViewClicked'");
-    target.mIcSearch = finder.castView(view, 2131231055, "field 'mIcSearch'");
-    unbinder.view2131231055 = view;
+    view = finder.findRequiredView(source, 2131231183, "field 'mLlHomeTitle'");
+    target.mLlHomeTitle = finder.castView(view, 2131231183, "field 'mLlHomeTitle'");
+    view = finder.findRequiredView(source, 2131231000, "field 'mIvAddress'");
+    target.mIvAddress = finder.castView(view, 2131231000, "field 'mIvAddress'");
+    view = finder.findRequiredView(source, 2131231058, "field 'mIcSearch' and method 'onViewClicked'");
+    target.mIcSearch = finder.castView(view, 2131231058, "field 'mIcSearch'");
+    unbinder.view2131231058 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231523, "field 'mTvAddress'");
-    target.mTvAddress = finder.castView(view, 2131231523, "field 'mTvAddress'");
-    view = finder.findRequiredView(source, 2131231125, "field 'mLlAddress' and method 'onViewClicked'");
-    target.mLlAddress = finder.castView(view, 2131231125, "field 'mLlAddress'");
-    unbinder.view2131231125 = view;
+    view = finder.findRequiredView(source, 2131231526, "field 'mTvAddress'");
+    target.mTvAddress = finder.castView(view, 2131231526, "field 'mTvAddress'");
+    view = finder.findRequiredView(source, 2131231128, "field 'mLlAddress' and method 'onViewClicked'");
+    target.mLlAddress = finder.castView(view, 2131231128, "field 'mLlAddress'");
+    unbinder.view2131231128 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -48,10 +48,10 @@ public class HomeFragment$$ViewBinder<T extends HomeFragment> implements ViewBin
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231101, "field 'mLayout'");
-    target.mLayout = finder.castView(view, 2131231101, "field 'mLayout'");
-    view = finder.findRequiredView(source, 2131230956, "field 'mFlContent'");
-    target.mFlContent = finder.castView(view, 2131230956, "field 'mFlContent'");
+    view = finder.findRequiredView(source, 2131231104, "field 'mLayout'");
+    target.mLayout = finder.castView(view, 2131231104, "field 'mLayout'");
+    view = finder.findRequiredView(source, 2131230957, "field 'mFlContent'");
+    target.mFlContent = finder.castView(view, 2131230957, "field 'mFlContent'");
     return unbinder;
   }
 
@@ -62,9 +62,9 @@ public class HomeFragment$$ViewBinder<T extends HomeFragment> implements ViewBin
   protected static class InnerUnbinder<T extends HomeFragment> implements Unbinder {
     private T target;
 
-    View view2131231055;
+    View view2131231058;
 
-    View view2131231125;
+    View view2131231128;
 
     View view2131230940;
 
@@ -82,10 +82,10 @@ public class HomeFragment$$ViewBinder<T extends HomeFragment> implements ViewBin
     protected void unbind(T target) {
       target.mLlHomeTitle = null;
       target.mIvAddress = null;
-      view2131231055.setOnClickListener(null);
+      view2131231058.setOnClickListener(null);
       target.mIcSearch = null;
       target.mTvAddress = null;
-      view2131231125.setOnClickListener(null);
+      view2131231128.setOnClickListener(null);
       target.mLlAddress = null;
       view2131230940.setOnClickListener(null);
       target.mEtSearch = null;

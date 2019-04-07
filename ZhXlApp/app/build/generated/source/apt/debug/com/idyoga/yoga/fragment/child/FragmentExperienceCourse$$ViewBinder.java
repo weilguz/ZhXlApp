@@ -14,8 +14,8 @@ public class FragmentExperienceCourse$$ViewBinder<T extends FragmentExperienceCo
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
     return unbinder;
   }
 

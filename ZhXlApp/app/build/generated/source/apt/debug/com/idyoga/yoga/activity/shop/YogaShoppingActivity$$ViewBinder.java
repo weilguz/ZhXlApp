@@ -14,8 +14,8 @@ public class YogaShoppingActivity$$ViewBinder<T extends YogaShoppingActivity> im
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131230956, "field 'mFlContent'");
-    target.mFlContent = finder.castView(view, 2131230956, "field 'mFlContent'");
+    view = finder.findRequiredView(source, 2131230957, "field 'mFlContent'");
+    target.mFlContent = finder.castView(view, 2131230957, "field 'mFlContent'");
     return unbinder;
   }
 

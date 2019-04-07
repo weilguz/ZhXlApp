@@ -319,16 +319,6 @@ ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xm
 		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:50:13-47
 	android:name
 		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:48:13-61
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:51:13-55:29
-action#android.intent.action.MAIN
-ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:52:17-69
-	android:name
-		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:52:25-66
-category#android.intent.category.LAUNCHER
-ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:54:17-77
-	android:name
-		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:54:27-74
 activity#com.idyoga.yoga.activity.loading.SetCityActivity
 ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:57:9-70
 	android:name
@@ -665,6 +655,16 @@ activity#com.idyoga.yoga.activity.TestActivity
 ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:152:9-158:20
 	android:name
 		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:152:19-56
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:153:13-157:29
+action#android.intent.action.MAIN
+ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:154:17-69
+	android:name
+		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:154:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:156:17-77
+	android:name
+		ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:156:27-74
 activity#com.idyoga.yoga.activity.TestUploadFileActivity
 ADDED from /home/weilgu/newrepo/scroller/ZhXlApp/app/src/main/AndroidManifest.xml:160:9-69
 	android:name

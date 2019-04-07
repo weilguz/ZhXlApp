@@ -15,32 +15,32 @@ public class LoginActivity$$ViewBinder<T extends LoginActivity> implements ViewB
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231164, "field 'llLgBk' and method 'onViewClicked'");
-    target.llLgBk = finder.castView(view, 2131231164, "field 'llLgBk'");
-    unbinder.view2131231164 = view;
+    view = finder.findRequiredView(source, 2131231167, "field 'llLgBk' and method 'onViewClicked'");
+    target.llLgBk = finder.castView(view, 2131231167, "field 'llLgBk'");
+    unbinder.view2131231167 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231165, "field 'llLgRg' and method 'onViewClicked'");
-    target.llLgRg = finder.castView(view, 2131231165, "field 'llLgRg'");
-    unbinder.view2131231165 = view;
+    view = finder.findRequiredView(source, 2131231168, "field 'llLgRg' and method 'onViewClicked'");
+    target.llLgRg = finder.castView(view, 2131231168, "field 'llLgRg'");
+    unbinder.view2131231168 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131230976, "field 'homeTabs'");
-    target.homeTabs = finder.castView(view, 2131230976, "field 'homeTabs'");
-    view = finder.findRequiredView(source, 2131230977, "field 'homeVpContent'");
-    target.homeVpContent = finder.castView(view, 2131230977, "field 'homeVpContent'");
+    view = finder.findRequiredView(source, 2131230977, "field 'homeTabs'");
+    target.homeTabs = finder.castView(view, 2131230977, "field 'homeTabs'");
+    view = finder.findRequiredView(source, 2131230978, "field 'homeVpContent'");
+    target.homeVpContent = finder.castView(view, 2131230978, "field 'homeVpContent'");
     view = finder.findRequiredView(source, 2131230859, "field 'civHead'");
     target.civHead = finder.castView(view, 2131230859, "field 'civHead'");
-    view = finder.findRequiredView(source, 2131231373, "field 'rlTitleBar'");
-    target.rlTitleBar = finder.castView(view, 2131231373, "field 'rlTitleBar'");
+    view = finder.findRequiredView(source, 2131231376, "field 'rlTitleBar'");
+    target.rlTitleBar = finder.castView(view, 2131231376, "field 'rlTitleBar'");
     return unbinder;
   }
 
@@ -51,9 +51,9 @@ public class LoginActivity$$ViewBinder<T extends LoginActivity> implements ViewB
   protected static class InnerUnbinder<T extends LoginActivity> implements Unbinder {
     private T target;
 
-    View view2131231164;
+    View view2131231167;
 
-    View view2131231165;
+    View view2131231168;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -67,9 +67,9 @@ public class LoginActivity$$ViewBinder<T extends LoginActivity> implements ViewB
     }
 
     protected void unbind(T target) {
-      view2131231164.setOnClickListener(null);
+      view2131231167.setOnClickListener(null);
       target.llLgBk = null;
-      view2131231165.setOnClickListener(null);
+      view2131231168.setOnClickListener(null);
       target.llLgRg = null;
       target.homeTabs = null;
       target.homeVpContent = null;

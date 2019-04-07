@@ -14,8 +14,8 @@ public class FragmentContent$$ViewBinder<T extends FragmentContent> implements V
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231732, "field 'mTvTag'");
-    target.mTvTag = finder.castView(view, 2131231732, "field 'mTvTag'");
+    view = finder.findRequiredView(source, 2131231735, "field 'mTvTag'");
+    target.mTvTag = finder.castView(view, 2131231735, "field 'mTvTag'");
     return unbinder;
   }
 

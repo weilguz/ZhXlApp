@@ -15,18 +15,18 @@ public class CoureseFunctionFragment$$ViewBinder<T extends CoureseFunctionFragme
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231394, "field 'mRlvTag'");
-    target.mRlvTag = finder.castView(view, 2131231394, "field 'mRlvTag'");
-    view = finder.findRequiredView(source, 2131231140, "field 'mLlDown' and method 'onViewClicked'");
-    target.mLlDown = finder.castView(view, 2131231140, "field 'mLlDown'");
-    unbinder.view2131231140 = view;
+    view = finder.findRequiredView(source, 2131231397, "field 'mRlvTag'");
+    target.mRlvTag = finder.castView(view, 2131231397, "field 'mRlvTag'");
+    view = finder.findRequiredView(source, 2131231143, "field 'mLlDown' and method 'onViewClicked'");
+    target.mLlDown = finder.castView(view, 2131231143, "field 'mLlDown'");
+    unbinder.view2131231143 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked();
       }
     });
-    view = finder.findRequiredView(source, 2131231797, "field 'mView'");
+    view = finder.findRequiredView(source, 2131231800, "field 'mView'");
     target.mView = view;
     return unbinder;
   }
@@ -38,7 +38,7 @@ public class CoureseFunctionFragment$$ViewBinder<T extends CoureseFunctionFragme
   protected static class InnerUnbinder<T extends CoureseFunctionFragment> implements Unbinder {
     private T target;
 
-    View view2131231140;
+    View view2131231143;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -53,7 +53,7 @@ public class CoureseFunctionFragment$$ViewBinder<T extends CoureseFunctionFragme
 
     protected void unbind(T target) {
       target.mRlvTag = null;
-      view2131231140.setOnClickListener(null);
+      view2131231143.setOnClickListener(null);
       target.mLlDown = null;
       target.mView = null;
     }

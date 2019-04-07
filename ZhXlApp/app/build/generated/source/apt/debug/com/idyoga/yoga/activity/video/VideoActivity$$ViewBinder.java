@@ -14,8 +14,8 @@ public class VideoActivity$$ViewBinder<T extends VideoActivity> implements ViewB
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231133, "field 'mRlBar'");
-    target.mRlBar = finder.castView(view, 2131231133, "field 'mRlBar'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mRlBar'");
+    target.mRlBar = finder.castView(view, 2131231136, "field 'mRlBar'");
     return unbinder;
   }
 

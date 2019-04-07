@@ -13,13 +13,13 @@ public final class R {
         public static final int leak_canary_toast_background = 0x7f0701f7;
     }
     public static final class id {
-        public static final int leak_canary_action = 0x7f080181;
-        public static final int leak_canary_display_leak_failure = 0x7f080182;
-        public static final int leak_canary_display_leak_list = 0x7f080183;
-        public static final int leak_canary_row_connector = 0x7f080184;
-        public static final int leak_canary_row_more = 0x7f080185;
-        public static final int leak_canary_row_text = 0x7f080186;
-        public static final int leak_canary_row_time = 0x7f080187;
+        public static final int leak_canary_action = 0x7f080184;
+        public static final int leak_canary_display_leak_failure = 0x7f080185;
+        public static final int leak_canary_display_leak_list = 0x7f080186;
+        public static final int leak_canary_row_connector = 0x7f080187;
+        public static final int leak_canary_row_more = 0x7f080188;
+        public static final int leak_canary_row_text = 0x7f080189;
+        public static final int leak_canary_row_time = 0x7f08018a;
     }
     public static final class layout {
         public static final int leak_canary_display_leak = 0x7f0a015a;

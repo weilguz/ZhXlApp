@@ -14,8 +14,8 @@ public class CourseDetailFragment$$ViewBinder<T extends CourseDetailFragment> im
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231569, "field 'mTvContent'");
-    target.mTvContent = finder.castView(view, 2131231569, "field 'mTvContent'");
+    view = finder.findRequiredView(source, 2131231572, "field 'mTvContent'");
+    target.mTvContent = finder.castView(view, 2131231572, "field 'mTvContent'");
     return unbinder;
   }
 

@@ -14,8 +14,8 @@ public class ConsultNoticeFragment$$ViewBinder<T extends ConsultNoticeFragment> 
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231224, "field 'mLvList'");
-    target.mLvList = finder.castView(view, 2131231224, "field 'mLvList'");
+    view = finder.findRequiredView(source, 2131231227, "field 'mLvList'");
+    target.mLvList = finder.castView(view, 2131231227, "field 'mLvList'");
     return unbinder;
   }
 

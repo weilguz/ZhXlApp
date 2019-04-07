@@ -15,11 +15,11 @@ public class CourseTagFragment$$ViewBinder<T extends CourseTagFragment> implemen
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231394, "field 'mRlvTag'");
-    target.mRlvTag = finder.castView(view, 2131231394, "field 'mRlvTag'");
-    view = finder.findRequiredView(source, 2131231171, "field 'mLlMore' and method 'onViewClicked'");
-    target.mLlMore = finder.castView(view, 2131231171, "field 'mLlMore'");
-    unbinder.view2131231171 = view;
+    view = finder.findRequiredView(source, 2131231397, "field 'mRlvTag'");
+    target.mRlvTag = finder.castView(view, 2131231397, "field 'mRlvTag'");
+    view = finder.findRequiredView(source, 2131231174, "field 'mLlMore' and method 'onViewClicked'");
+    target.mLlMore = finder.castView(view, 2131231174, "field 'mLlMore'");
+    unbinder.view2131231174 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -36,7 +36,7 @@ public class CourseTagFragment$$ViewBinder<T extends CourseTagFragment> implemen
   protected static class InnerUnbinder<T extends CourseTagFragment> implements Unbinder {
     private T target;
 
-    View view2131231171;
+    View view2131231174;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -51,7 +51,7 @@ public class CourseTagFragment$$ViewBinder<T extends CourseTagFragment> implemen
 
     protected void unbind(T target) {
       target.mRlvTag = null;
-      view2131231171.setOnClickListener(null);
+      view2131231174.setOnClickListener(null);
       target.mLlMore = null;
     }
   }

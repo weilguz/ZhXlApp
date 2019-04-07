@@ -15,13 +15,13 @@ public class VideoFragment$$ViewBinder<T extends VideoFragment> implements ViewB
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131230997, "field 'mIvAddress'");
-    target.mIvAddress = finder.castView(view, 2131230997, "field 'mIvAddress'");
-    view = finder.findRequiredView(source, 2131231523, "field 'mTvAddress'");
-    target.mTvAddress = finder.castView(view, 2131231523, "field 'mTvAddress'");
-    view = finder.findRequiredView(source, 2131231125, "field 'mLlAddress' and method 'onViewClicked'");
-    target.mLlAddress = finder.castView(view, 2131231125, "field 'mLlAddress'");
-    unbinder.view2131231125 = view;
+    view = finder.findRequiredView(source, 2131231000, "field 'mIvAddress'");
+    target.mIvAddress = finder.castView(view, 2131231000, "field 'mIvAddress'");
+    view = finder.findRequiredView(source, 2131231526, "field 'mTvAddress'");
+    target.mTvAddress = finder.castView(view, 2131231526, "field 'mTvAddress'");
+    view = finder.findRequiredView(source, 2131231128, "field 'mLlAddress' and method 'onViewClicked'");
+    target.mLlAddress = finder.castView(view, 2131231128, "field 'mLlAddress'");
+    unbinder.view2131231128 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -37,21 +37,21 @@ public class VideoFragment$$ViewBinder<T extends VideoFragment> implements ViewB
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231055, "field 'mIvSearch' and method 'onViewClicked'");
-    target.mIvSearch = finder.castView(view, 2131231055, "field 'mIvSearch'");
-    unbinder.view2131231055 = view;
+    view = finder.findRequiredView(source, 2131231058, "field 'mIvSearch' and method 'onViewClicked'");
+    target.mIvSearch = finder.castView(view, 2131231058, "field 'mIvSearch'");
+    unbinder.view2131231058 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231180, "field 'mLlSearchTitle'");
-    target.mLlSearchTitle = finder.castView(view, 2131231180, "field 'mLlSearchTitle'");
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
-    view = finder.findRequiredView(source, 2131231467, "field 'mSrlRefresh'");
-    target.mSrlRefresh = finder.castView(view, 2131231467, "field 'mSrlRefresh'");
+    view = finder.findRequiredView(source, 2131231183, "field 'mLlSearchTitle'");
+    target.mLlSearchTitle = finder.castView(view, 2131231183, "field 'mLlSearchTitle'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231470, "field 'mSrlRefresh'");
+    target.mSrlRefresh = finder.castView(view, 2131231470, "field 'mSrlRefresh'");
     return unbinder;
   }
 
@@ -62,11 +62,11 @@ public class VideoFragment$$ViewBinder<T extends VideoFragment> implements ViewB
   protected static class InnerUnbinder<T extends VideoFragment> implements Unbinder {
     private T target;
 
-    View view2131231125;
+    View view2131231128;
 
     View view2131230940;
 
-    View view2131231055;
+    View view2131231058;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -82,11 +82,11 @@ public class VideoFragment$$ViewBinder<T extends VideoFragment> implements ViewB
     protected void unbind(T target) {
       target.mIvAddress = null;
       target.mTvAddress = null;
-      view2131231125.setOnClickListener(null);
+      view2131231128.setOnClickListener(null);
       target.mLlAddress = null;
       view2131230940.setOnClickListener(null);
       target.mEtSearch = null;
-      view2131231055.setOnClickListener(null);
+      view2131231058.setOnClickListener(null);
       target.mIvSearch = null;
       target.mLlSearchTitle = null;
       target.mRvList = null;

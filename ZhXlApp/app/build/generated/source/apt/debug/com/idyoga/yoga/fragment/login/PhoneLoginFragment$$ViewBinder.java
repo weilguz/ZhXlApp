@@ -37,9 +37,9 @@ public class PhoneLoginFragment$$ViewBinder<T extends PhoneLoginFragment> implem
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231095, "field 'ivWxLogin' and method 'onViewClicked'");
-    target.ivWxLogin = finder.castView(view, 2131231095, "field 'ivWxLogin'");
-    unbinder.view2131231095 = view;
+    view = finder.findRequiredView(source, 2131231098, "field 'ivWxLogin' and method 'onViewClicked'");
+    target.ivWxLogin = finder.castView(view, 2131231098, "field 'ivWxLogin'");
+    unbinder.view2131231098 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -69,7 +69,7 @@ public class PhoneLoginFragment$$ViewBinder<T extends PhoneLoginFragment> implem
 
     View view2131230810;
 
-    View view2131231095;
+    View view2131231098;
 
     View view2131230813;
 
@@ -91,7 +91,7 @@ public class PhoneLoginFragment$$ViewBinder<T extends PhoneLoginFragment> implem
       target.etInputPwd = null;
       view2131230810.setOnClickListener(null);
       target.btnForgetPrw = null;
-      view2131231095.setOnClickListener(null);
+      view2131231098.setOnClickListener(null);
       target.ivWxLogin = null;
       view2131230813.setOnClickListener(null);
       target.btnLogin = null;

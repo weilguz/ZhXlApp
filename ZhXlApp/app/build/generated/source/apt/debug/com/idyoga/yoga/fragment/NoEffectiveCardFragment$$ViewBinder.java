@@ -14,16 +14,16 @@ public class NoEffectiveCardFragment$$ViewBinder<T extends NoEffectiveCardFragme
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231667, "field 'tvNoCard'");
-    target.tvNoCard = finder.castView(view, 2131231667, "field 'tvNoCard'");
-    view = finder.findRequiredView(source, 2131231522, "field 'tvActivaCard'");
-    target.tvActivaCard = finder.castView(view, 2131231522, "field 'tvActivaCard'");
-    view = finder.findRequiredView(source, 2131231612, "field 'tvExchange'");
-    target.tvExchange = finder.castView(view, 2131231612, "field 'tvExchange'");
-    view = finder.findRequiredView(source, 2131231175, "field 'llNoCard'");
-    target.llNoCard = finder.castView(view, 2131231175, "field 'llNoCard'");
-    view = finder.findRequiredView(source, 2131231222, "field 'lvCardList'");
-    target.lvCardList = finder.castView(view, 2131231222, "field 'lvCardList'");
+    view = finder.findRequiredView(source, 2131231670, "field 'tvNoCard'");
+    target.tvNoCard = finder.castView(view, 2131231670, "field 'tvNoCard'");
+    view = finder.findRequiredView(source, 2131231525, "field 'tvActivaCard'");
+    target.tvActivaCard = finder.castView(view, 2131231525, "field 'tvActivaCard'");
+    view = finder.findRequiredView(source, 2131231615, "field 'tvExchange'");
+    target.tvExchange = finder.castView(view, 2131231615, "field 'tvExchange'");
+    view = finder.findRequiredView(source, 2131231178, "field 'llNoCard'");
+    target.llNoCard = finder.castView(view, 2131231178, "field 'llNoCard'");
+    view = finder.findRequiredView(source, 2131231225, "field 'lvCardList'");
+    target.lvCardList = finder.castView(view, 2131231225, "field 'lvCardList'");
     return unbinder;
   }
 

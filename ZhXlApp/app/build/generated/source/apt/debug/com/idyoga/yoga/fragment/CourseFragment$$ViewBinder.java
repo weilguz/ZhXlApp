@@ -19,13 +19,13 @@ public class CourseFragment$$ViewBinder<T extends CourseFragment> implements Vie
     target.mCourseTabs = finder.castView(view, 2131230879, "field 'mCourseTabs'");
     view = finder.findRequiredView(source, 2131230880, "field 'mCourseVpContent'");
     target.mCourseVpContent = finder.castView(view, 2131230880, "field 'mCourseVpContent'");
-    view = finder.findRequiredView(source, 2131231523, "field 'mTvAddress'");
-    target.mTvAddress = finder.castView(view, 2131231523, "field 'mTvAddress'");
-    view = finder.findRequiredView(source, 2131230997, "field 'mIvAddress'");
-    target.mIvAddress = finder.castView(view, 2131230997, "field 'mIvAddress'");
-    view = finder.findRequiredView(source, 2131231125, "field 'mLlAddress' and method 'onViewClicked'");
-    target.mLlAddress = finder.castView(view, 2131231125, "field 'mLlAddress'");
-    unbinder.view2131231125 = view;
+    view = finder.findRequiredView(source, 2131231526, "field 'mTvAddress'");
+    target.mTvAddress = finder.castView(view, 2131231526, "field 'mTvAddress'");
+    view = finder.findRequiredView(source, 2131231000, "field 'mIvAddress'");
+    target.mIvAddress = finder.castView(view, 2131231000, "field 'mIvAddress'");
+    view = finder.findRequiredView(source, 2131231128, "field 'mLlAddress' and method 'onViewClicked'");
+    target.mLlAddress = finder.castView(view, 2131231128, "field 'mLlAddress'");
+    unbinder.view2131231128 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -41,8 +41,8 @@ public class CourseFragment$$ViewBinder<T extends CourseFragment> implements Vie
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231180, "field 'mLlSearchTitle'");
-    target.mLlSearchTitle = finder.castView(view, 2131231180, "field 'mLlSearchTitle'");
+    view = finder.findRequiredView(source, 2131231183, "field 'mLlSearchTitle'");
+    target.mLlSearchTitle = finder.castView(view, 2131231183, "field 'mLlSearchTitle'");
     return unbinder;
   }
 
@@ -53,7 +53,7 @@ public class CourseFragment$$ViewBinder<T extends CourseFragment> implements Vie
   protected static class InnerUnbinder<T extends CourseFragment> implements Unbinder {
     private T target;
 
-    View view2131231125;
+    View view2131231128;
 
     View view2131230940;
 
@@ -73,7 +73,7 @@ public class CourseFragment$$ViewBinder<T extends CourseFragment> implements Vie
       target.mCourseVpContent = null;
       target.mTvAddress = null;
       target.mIvAddress = null;
-      view2131231125.setOnClickListener(null);
+      view2131231128.setOnClickListener(null);
       target.mLlAddress = null;
       view2131230940.setOnClickListener(null);
       target.mEtSearch = null;

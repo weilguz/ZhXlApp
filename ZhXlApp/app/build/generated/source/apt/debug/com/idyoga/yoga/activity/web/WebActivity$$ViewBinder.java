@@ -15,25 +15,25 @@ public class WebActivity$$ViewBinder<T extends WebActivity> implements ViewBinde
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231199, "field 'mLlTitleBack' and method 'onViewClicked'");
-    target.mLlTitleBack = finder.castView(view, 2131231199, "field 'mLlTitleBack'");
-    unbinder.view2131231199 = view;
+    view = finder.findRequiredView(source, 2131231202, "field 'mLlTitleBack' and method 'onViewClicked'");
+    target.mLlTitleBack = finder.castView(view, 2131231202, "field 'mLlTitleBack'");
+    unbinder.view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked();
       }
     });
-    view = finder.findRequiredView(source, 2131231754, "field 'mTvTitleText'");
-    target.mTvTitleText = finder.castView(view, 2131231754, "field 'mTvTitleText'");
-    view = finder.findRequiredView(source, 2131231753, "field 'mTvTitleRight'");
-    target.mTvTitleRight = finder.castView(view, 2131231753, "field 'mTvTitleRight'");
-    view = finder.findRequiredView(source, 2131231200, "field 'mLlTitleRight'");
-    target.mLlTitleRight = finder.castView(view, 2131231200, "field 'mLlTitleRight'");
-    view = finder.findRequiredView(source, 2131231133, "field 'mLlCommonLayout'");
-    target.mLlCommonLayout = finder.castView(view, 2131231133, "field 'mLlCommonLayout'");
-    view = finder.findRequiredView(source, 2131231821, "field 'mWvView'");
-    target.mWvView = finder.castView(view, 2131231821, "field 'mWvView'");
+    view = finder.findRequiredView(source, 2131231757, "field 'mTvTitleText'");
+    target.mTvTitleText = finder.castView(view, 2131231757, "field 'mTvTitleText'");
+    view = finder.findRequiredView(source, 2131231756, "field 'mTvTitleRight'");
+    target.mTvTitleRight = finder.castView(view, 2131231756, "field 'mTvTitleRight'");
+    view = finder.findRequiredView(source, 2131231203, "field 'mLlTitleRight'");
+    target.mLlTitleRight = finder.castView(view, 2131231203, "field 'mLlTitleRight'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mLlCommonLayout'");
+    target.mLlCommonLayout = finder.castView(view, 2131231136, "field 'mLlCommonLayout'");
+    view = finder.findRequiredView(source, 2131231824, "field 'mWvView'");
+    target.mWvView = finder.castView(view, 2131231824, "field 'mWvView'");
     return unbinder;
   }
 
@@ -44,7 +44,7 @@ public class WebActivity$$ViewBinder<T extends WebActivity> implements ViewBinde
   protected static class InnerUnbinder<T extends WebActivity> implements Unbinder {
     private T target;
 
-    View view2131231199;
+    View view2131231202;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -58,7 +58,7 @@ public class WebActivity$$ViewBinder<T extends WebActivity> implements ViewBinde
     }
 
     protected void unbind(T target) {
-      view2131231199.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
       target.mLlTitleBack = null;
       target.mTvTitleText = null;
       target.mTvTitleRight = null;

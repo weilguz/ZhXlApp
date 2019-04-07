@@ -15,42 +15,42 @@ public class CourseCommentActivity$$ViewBinder<T extends CourseCommentActivity> 
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231580, "field 'mTvCourseName'");
-    target.mTvCourseName = finder.castView(view, 2131231580, "field 'mTvCourseName'");
-    view = finder.findRequiredView(source, 2131231585, "field 'mTvCourseShop'");
-    target.mTvCourseShop = finder.castView(view, 2131231585, "field 'mTvCourseShop'");
-    view = finder.findRequiredView(source, 2131231199, "field 'mLlTitleBack' and method 'onViewClicked'");
-    target.mLlTitleBack = finder.castView(view, 2131231199, "field 'mLlTitleBack'");
-    unbinder.view2131231199 = view;
+    view = finder.findRequiredView(source, 2131231583, "field 'mTvCourseName'");
+    target.mTvCourseName = finder.castView(view, 2131231583, "field 'mTvCourseName'");
+    view = finder.findRequiredView(source, 2131231588, "field 'mTvCourseShop'");
+    target.mTvCourseShop = finder.castView(view, 2131231588, "field 'mTvCourseShop'");
+    view = finder.findRequiredView(source, 2131231202, "field 'mLlTitleBack' and method 'onViewClicked'");
+    target.mLlTitleBack = finder.castView(view, 2131231202, "field 'mLlTitleBack'");
+    unbinder.view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231754, "field 'mTvTitleText'");
-    target.mTvTitleText = finder.castView(view, 2131231754, "field 'mTvTitleText'");
-    view = finder.findRequiredView(source, 2131231753, "field 'mTvTitleRight'");
-    target.mTvTitleRight = finder.castView(view, 2131231753, "field 'mTvTitleRight'");
-    view = finder.findRequiredView(source, 2131231200, "field 'mLlTitleRight' and method 'onViewClicked'");
-    target.mLlTitleRight = finder.castView(view, 2131231200, "field 'mLlTitleRight'");
-    unbinder.view2131231200 = view;
+    view = finder.findRequiredView(source, 2131231757, "field 'mTvTitleText'");
+    target.mTvTitleText = finder.castView(view, 2131231757, "field 'mTvTitleText'");
+    view = finder.findRequiredView(source, 2131231756, "field 'mTvTitleRight'");
+    target.mTvTitleRight = finder.castView(view, 2131231756, "field 'mTvTitleRight'");
+    view = finder.findRequiredView(source, 2131231203, "field 'mLlTitleRight' and method 'onViewClicked'");
+    target.mLlTitleRight = finder.castView(view, 2131231203, "field 'mLlTitleRight'");
+    unbinder.view2131231203 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231133, "field 'mLlCommonLayout'");
-    target.mLlCommonLayout = finder.castView(view, 2131231133, "field 'mLlCommonLayout'");
-    view = finder.findRequiredView(source, 2131231035, "field 'mIvImg'");
-    target.mIvImg = finder.castView(view, 2131231035, "field 'mIvImg'");
-    view = finder.findRequiredView(source, 2131231588, "field 'mTvCourseTime'");
-    target.mTvCourseTime = finder.castView(view, 2131231588, "field 'mTvCourseTime'");
-    view = finder.findRequiredView(source, 2131231159, "field 'mLlLayoutPrice'");
-    target.mLlLayoutPrice = finder.castView(view, 2131231159, "field 'mLlLayoutPrice'");
-    view = finder.findRequiredView(source, 2131231351, "field 'mRlItemView'");
-    target.mRlItemView = finder.castView(view, 2131231351, "field 'mRlItemView'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mLlCommonLayout'");
+    target.mLlCommonLayout = finder.castView(view, 2131231136, "field 'mLlCommonLayout'");
+    view = finder.findRequiredView(source, 2131231038, "field 'mIvImg'");
+    target.mIvImg = finder.castView(view, 2131231038, "field 'mIvImg'");
+    view = finder.findRequiredView(source, 2131231591, "field 'mTvCourseTime'");
+    target.mTvCourseTime = finder.castView(view, 2131231591, "field 'mTvCourseTime'");
+    view = finder.findRequiredView(source, 2131231162, "field 'mLlLayoutPrice'");
+    target.mLlLayoutPrice = finder.castView(view, 2131231162, "field 'mLlLayoutPrice'");
+    view = finder.findRequiredView(source, 2131231354, "field 'mRlItemView'");
+    target.mRlItemView = finder.castView(view, 2131231354, "field 'mRlItemView'");
     view = finder.findRequiredView(source, 2131230928, "field 'mEtComment'");
     target.mEtComment = finder.castView(view, 2131230928, "field 'mEtComment'");
     return unbinder;
@@ -63,9 +63,9 @@ public class CourseCommentActivity$$ViewBinder<T extends CourseCommentActivity> 
   protected static class InnerUnbinder<T extends CourseCommentActivity> implements Unbinder {
     private T target;
 
-    View view2131231199;
+    View view2131231202;
 
-    View view2131231200;
+    View view2131231203;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -81,11 +81,11 @@ public class CourseCommentActivity$$ViewBinder<T extends CourseCommentActivity> 
     protected void unbind(T target) {
       target.mTvCourseName = null;
       target.mTvCourseShop = null;
-      view2131231199.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
       target.mLlTitleBack = null;
       target.mTvTitleText = null;
       target.mTvTitleRight = null;
-      view2131231200.setOnClickListener(null);
+      view2131231203.setOnClickListener(null);
       target.mLlTitleRight = null;
       target.mLlCommonLayout = null;
       target.mIvImg = null;

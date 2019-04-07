@@ -14,16 +14,16 @@ public class FragmentTutor$$ViewBinder<T extends FragmentTutor> implements ViewB
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
-    view = finder.findRequiredView(source, 2131231467, "field 'mSrlRefresh'");
-    target.mSrlRefresh = finder.castView(view, 2131231467, "field 'mSrlRefresh'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231470, "field 'mSrlRefresh'");
+    target.mSrlRefresh = finder.castView(view, 2131231470, "field 'mSrlRefresh'");
     view = finder.findRequiredView(source, 2131230836, "field 'mBvView'");
     target.mBvView = finder.castView(view, 2131230836, "field 'mBvView'");
     view = finder.findRequiredView(source, 2131230883, "field 'mNsvView'");
     target.mNsvView = finder.castView(view, 2131230883, "field 'mNsvView'");
-    view = finder.findRequiredView(source, 2131231150, "field 'mLlLayout'");
-    target.mLlLayout = finder.castView(view, 2131231150, "field 'mLlLayout'");
+    view = finder.findRequiredView(source, 2131231153, "field 'mLlLayout'");
+    target.mLlLayout = finder.castView(view, 2131231153, "field 'mLlLayout'");
     return unbinder;
   }
 

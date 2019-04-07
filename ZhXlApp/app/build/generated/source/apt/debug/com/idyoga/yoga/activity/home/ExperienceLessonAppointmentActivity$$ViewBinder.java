@@ -15,63 +15,63 @@ public class ExperienceLessonAppointmentActivity$$ViewBinder<T extends Experienc
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231580, "field 'mCourseName'");
-    target.mCourseName = finder.castView(view, 2131231580, "field 'mCourseName'");
-    view = finder.findRequiredView(source, 2131231199, "field 'mLlTitleBack' and method 'onViewClicked'");
-    target.mLlTitleBack = finder.castView(view, 2131231199, "field 'mLlTitleBack'");
-    unbinder.view2131231199 = view;
+    view = finder.findRequiredView(source, 2131231583, "field 'mCourseName'");
+    target.mCourseName = finder.castView(view, 2131231583, "field 'mCourseName'");
+    view = finder.findRequiredView(source, 2131231202, "field 'mLlTitleBack' and method 'onViewClicked'");
+    target.mLlTitleBack = finder.castView(view, 2131231202, "field 'mLlTitleBack'");
+    unbinder.view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231707, "field 'mTvShopName'");
-    target.mTvShopName = finder.castView(view, 2131231707, "field 'mTvShopName'");
-    view = finder.findRequiredView(source, 2131231704, "field 'mTvShopAddress'");
-    target.mTvShopAddress = finder.castView(view, 2131231704, "field 'mTvShopAddress'");
-    view = finder.findRequiredView(source, 2131231701, "field 'mTvSelectTime'");
-    target.mTvSelectTime = finder.castView(view, 2131231701, "field 'mTvSelectTime'");
-    view = finder.findRequiredView(source, 2131231699, "field 'mTvSelectTeacher'");
-    target.mTvSelectTeacher = finder.castView(view, 2131231699, "field 'mTvSelectTeacher'");
-    view = finder.findRequiredView(source, 2131231678, "field 'mTvPeopleNum'");
-    target.mTvPeopleNum = finder.castView(view, 2131231678, "field 'mTvPeopleNum'");
-    view = finder.findRequiredView(source, 2131231656, "field 'mTvMobile'");
-    target.mTvMobile = finder.castView(view, 2131231656, "field 'mTvMobile'");
-    view = finder.findRequiredView(source, 2131231547, "field 'mTvCard'");
-    target.mTvCard = finder.castView(view, 2131231547, "field 'mTvCard'");
-    view = finder.findRequiredView(source, 2131231654, "field 'mTvMessage'");
-    target.mTvMessage = finder.castView(view, 2131231654, "field 'mTvMessage'");
-    view = finder.findRequiredView(source, 2131231665, "field 'mTvNext' and method 'onViewClicked'");
-    target.mTvNext = finder.castView(view, 2131231665, "field 'mTvNext'");
-    unbinder.view2131231665 = view;
+    view = finder.findRequiredView(source, 2131231710, "field 'mTvShopName'");
+    target.mTvShopName = finder.castView(view, 2131231710, "field 'mTvShopName'");
+    view = finder.findRequiredView(source, 2131231707, "field 'mTvShopAddress'");
+    target.mTvShopAddress = finder.castView(view, 2131231707, "field 'mTvShopAddress'");
+    view = finder.findRequiredView(source, 2131231704, "field 'mTvSelectTime'");
+    target.mTvSelectTime = finder.castView(view, 2131231704, "field 'mTvSelectTime'");
+    view = finder.findRequiredView(source, 2131231702, "field 'mTvSelectTeacher'");
+    target.mTvSelectTeacher = finder.castView(view, 2131231702, "field 'mTvSelectTeacher'");
+    view = finder.findRequiredView(source, 2131231681, "field 'mTvPeopleNum'");
+    target.mTvPeopleNum = finder.castView(view, 2131231681, "field 'mTvPeopleNum'");
+    view = finder.findRequiredView(source, 2131231659, "field 'mTvMobile'");
+    target.mTvMobile = finder.castView(view, 2131231659, "field 'mTvMobile'");
+    view = finder.findRequiredView(source, 2131231550, "field 'mTvCard'");
+    target.mTvCard = finder.castView(view, 2131231550, "field 'mTvCard'");
+    view = finder.findRequiredView(source, 2131231657, "field 'mTvMessage'");
+    target.mTvMessage = finder.castView(view, 2131231657, "field 'mTvMessage'");
+    view = finder.findRequiredView(source, 2131231668, "field 'mTvNext' and method 'onViewClicked'");
+    target.mTvNext = finder.castView(view, 2131231668, "field 'mTvNext'");
+    unbinder.view2131231668 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231142, "field 'mLlFootLayout'");
-    target.mLlFootLayout = finder.castView(view, 2131231142, "field 'mLlFootLayout'");
-    view = finder.findRequiredView(source, 2131231362, "field 'mRlRoot'");
-    target.mRlRoot = finder.castView(view, 2131231362, "field 'mRlRoot'");
-    view = finder.findRequiredView(source, 2131231133, "field 'mLlCommonLayout'");
-    target.mLlCommonLayout = finder.castView(view, 2131231133, "field 'mLlCommonLayout'");
-    view = finder.findRequiredView(source, 2131231035, "field 'mIvImg'");
-    target.mIvImg = finder.castView(view, 2131231035, "field 'mIvImg'");
-    view = finder.findRequiredView(source, 2131231588, "field 'mCourseTime'");
-    target.mCourseTime = finder.castView(view, 2131231588, "field 'mCourseTime'");
-    view = finder.findRequiredView(source, 2131231364, "field 'mRlSelectCard' and method 'onViewClicked'");
-    target.mRlSelectCard = finder.castView(view, 2131231364, "field 'mRlSelectCard'");
-    unbinder.view2131231364 = view;
+    view = finder.findRequiredView(source, 2131231145, "field 'mLlFootLayout'");
+    target.mLlFootLayout = finder.castView(view, 2131231145, "field 'mLlFootLayout'");
+    view = finder.findRequiredView(source, 2131231365, "field 'mRlRoot'");
+    target.mRlRoot = finder.castView(view, 2131231365, "field 'mRlRoot'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mLlCommonLayout'");
+    target.mLlCommonLayout = finder.castView(view, 2131231136, "field 'mLlCommonLayout'");
+    view = finder.findRequiredView(source, 2131231038, "field 'mIvImg'");
+    target.mIvImg = finder.castView(view, 2131231038, "field 'mIvImg'");
+    view = finder.findRequiredView(source, 2131231591, "field 'mCourseTime'");
+    target.mCourseTime = finder.castView(view, 2131231591, "field 'mCourseTime'");
+    view = finder.findRequiredView(source, 2131231367, "field 'mRlSelectCard' and method 'onViewClicked'");
+    target.mRlSelectCard = finder.castView(view, 2131231367, "field 'mRlSelectCard'");
+    unbinder.view2131231367 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231371, "method 'onViewClicked'");
-    unbinder.view2131231371 = view;
+    view = finder.findRequiredView(source, 2131231374, "method 'onViewClicked'");
+    unbinder.view2131231374 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -88,13 +88,13 @@ public class ExperienceLessonAppointmentActivity$$ViewBinder<T extends Experienc
   protected static class InnerUnbinder<T extends ExperienceLessonAppointmentActivity> implements Unbinder {
     private T target;
 
-    View view2131231199;
+    View view2131231202;
 
-    View view2131231665;
+    View view2131231668;
 
-    View view2131231364;
+    View view2131231367;
 
-    View view2131231371;
+    View view2131231374;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -109,7 +109,7 @@ public class ExperienceLessonAppointmentActivity$$ViewBinder<T extends Experienc
 
     protected void unbind(T target) {
       target.mCourseName = null;
-      view2131231199.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
       target.mLlTitleBack = null;
       target.mTvShopName = null;
       target.mTvShopAddress = null;
@@ -119,16 +119,16 @@ public class ExperienceLessonAppointmentActivity$$ViewBinder<T extends Experienc
       target.mTvMobile = null;
       target.mTvCard = null;
       target.mTvMessage = null;
-      view2131231665.setOnClickListener(null);
+      view2131231668.setOnClickListener(null);
       target.mTvNext = null;
       target.mLlFootLayout = null;
       target.mRlRoot = null;
       target.mLlCommonLayout = null;
       target.mIvImg = null;
       target.mCourseTime = null;
-      view2131231364.setOnClickListener(null);
+      view2131231367.setOnClickListener(null);
       target.mRlSelectCard = null;
-      view2131231371.setOnClickListener(null);
+      view2131231374.setOnClickListener(null);
     }
   }
 }

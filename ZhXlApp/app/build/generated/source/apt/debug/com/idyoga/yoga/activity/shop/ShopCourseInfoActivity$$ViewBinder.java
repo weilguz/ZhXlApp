@@ -15,24 +15,24 @@ public class ShopCourseInfoActivity$$ViewBinder<T extends ShopCourseInfoActivity
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231199, "method 'onViewClicked'");
-    unbinder.view2131231199 = view;
+    view = finder.findRequiredView(source, 2131231202, "method 'onViewClicked'");
+    unbinder.view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231006, "method 'onViewClicked'");
-    unbinder.view2131231006 = view;
+    view = finder.findRequiredView(source, 2131231009, "method 'onViewClicked'");
+    unbinder.view2131231009 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231665, "method 'onViewClicked'");
-    unbinder.view2131231665 = view;
+    view = finder.findRequiredView(source, 2131231668, "method 'onViewClicked'");
+    unbinder.view2131231668 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -49,11 +49,11 @@ public class ShopCourseInfoActivity$$ViewBinder<T extends ShopCourseInfoActivity
   protected static class InnerUnbinder<T extends ShopCourseInfoActivity> implements Unbinder {
     private T target;
 
-    View view2131231199;
+    View view2131231202;
 
-    View view2131231006;
+    View view2131231009;
 
-    View view2131231665;
+    View view2131231668;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -67,9 +67,9 @@ public class ShopCourseInfoActivity$$ViewBinder<T extends ShopCourseInfoActivity
     }
 
     protected void unbind(T target) {
-      view2131231199.setOnClickListener(null);
-      view2131231006.setOnClickListener(null);
-      view2131231665.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
+      view2131231009.setOnClickListener(null);
+      view2131231668.setOnClickListener(null);
     }
   }
 }

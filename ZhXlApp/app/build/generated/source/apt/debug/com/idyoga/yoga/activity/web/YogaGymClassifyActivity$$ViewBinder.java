@@ -15,30 +15,30 @@ public class YogaGymClassifyActivity$$ViewBinder<T extends YogaGymClassifyActivi
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231207, "field 'mLlWebLayout'");
-    target.mLlWebLayout = finder.castView(view, 2131231207, "field 'mLlWebLayout'");
-    view = finder.findRequiredView(source, 2131231199, "field 'mLlTitleBack' and method 'onViewClicked'");
-    target.mLlTitleBack = finder.castView(view, 2131231199, "field 'mLlTitleBack'");
-    unbinder.view2131231199 = view;
+    view = finder.findRequiredView(source, 2131231210, "field 'mLlWebLayout'");
+    target.mLlWebLayout = finder.castView(view, 2131231210, "field 'mLlWebLayout'");
+    view = finder.findRequiredView(source, 2131231202, "field 'mLlTitleBack' and method 'onViewClicked'");
+    target.mLlTitleBack = finder.castView(view, 2131231202, "field 'mLlTitleBack'");
+    unbinder.view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231754, "field 'mTvTitleText'");
-    target.mTvTitleText = finder.castView(view, 2131231754, "field 'mTvTitleText'");
-    view = finder.findRequiredView(source, 2131231753, "field 'mTvTitleRight' and method 'onViewClicked'");
-    target.mTvTitleRight = finder.castView(view, 2131231753, "field 'mTvTitleRight'");
-    unbinder.view2131231753 = view;
+    view = finder.findRequiredView(source, 2131231757, "field 'mTvTitleText'");
+    target.mTvTitleText = finder.castView(view, 2131231757, "field 'mTvTitleText'");
+    view = finder.findRequiredView(source, 2131231756, "field 'mTvTitleRight' and method 'onViewClicked'");
+    target.mTvTitleRight = finder.castView(view, 2131231756, "field 'mTvTitleRight'");
+    unbinder.view2131231756 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231133, "field 'mLlCommonLayout'");
-    target.mLlCommonLayout = finder.castView(view, 2131231133, "field 'mLlCommonLayout'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mLlCommonLayout'");
+    target.mLlCommonLayout = finder.castView(view, 2131231136, "field 'mLlCommonLayout'");
     return unbinder;
   }
 
@@ -49,9 +49,9 @@ public class YogaGymClassifyActivity$$ViewBinder<T extends YogaGymClassifyActivi
   protected static class InnerUnbinder<T extends YogaGymClassifyActivity> implements Unbinder {
     private T target;
 
-    View view2131231199;
+    View view2131231202;
 
-    View view2131231753;
+    View view2131231756;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -66,10 +66,10 @@ public class YogaGymClassifyActivity$$ViewBinder<T extends YogaGymClassifyActivi
 
     protected void unbind(T target) {
       target.mLlWebLayout = null;
-      view2131231199.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
       target.mLlTitleBack = null;
       target.mTvTitleText = null;
-      view2131231753.setOnClickListener(null);
+      view2131231756.setOnClickListener(null);
       target.mTvTitleRight = null;
       target.mLlCommonLayout = null;
     }

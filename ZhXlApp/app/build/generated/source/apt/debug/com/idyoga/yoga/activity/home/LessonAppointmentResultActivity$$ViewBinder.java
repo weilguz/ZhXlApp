@@ -15,37 +15,37 @@ public class LessonAppointmentResultActivity$$ViewBinder<T extends LessonAppoint
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231199, "field 'mLlTitleBack' and method 'onViewClicked'");
-    target.mLlTitleBack = finder.castView(view, 2131231199, "field 'mLlTitleBack'");
-    unbinder.view2131231199 = view;
+    view = finder.findRequiredView(source, 2131231202, "field 'mLlTitleBack' and method 'onViewClicked'");
+    target.mLlTitleBack = finder.castView(view, 2131231202, "field 'mLlTitleBack'");
+    unbinder.view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231754, "field 'mTvTitleText'");
-    target.mTvTitleText = finder.castView(view, 2131231754, "field 'mTvTitleText'");
-    view = finder.findRequiredView(source, 2131231133, "field 'mLlCommonLayout'");
-    target.mLlCommonLayout = finder.castView(view, 2131231133, "field 'mLlCommonLayout'");
-    view = finder.findRequiredView(source, 2131231688, "field 'tvResult'");
-    target.tvResult = finder.castView(view, 2131231688, "field 'tvResult'");
-    view = finder.findRequiredView(source, 2131231673, "field 'tvOrderId'");
-    target.tvOrderId = finder.castView(view, 2131231673, "field 'tvOrderId'");
-    view = finder.findRequiredView(source, 2131231639, "field 'tvLessonName'");
-    target.tvLessonName = finder.castView(view, 2131231639, "field 'tvLessonName'");
-    view = finder.findRequiredView(source, 2131231562, "field 'tvClassroomName'");
-    target.tvClassroomName = finder.castView(view, 2131231562, "field 'tvClassroomName'");
-    view = finder.findRequiredView(source, 2131231641, "field 'tvLessonTeacher'");
-    target.tvLessonTeacher = finder.castView(view, 2131231641, "field 'tvLessonTeacher'");
-    view = finder.findRequiredView(source, 2131231642, "field 'tvLessonTime'");
-    target.tvLessonTime = finder.castView(view, 2131231642, "field 'tvLessonTime'");
-    view = finder.findRequiredView(source, 2131231638, "field 'tvLessonAttention'");
-    target.tvLessonAttention = finder.castView(view, 2131231638, "field 'tvLessonAttention'");
-    view = finder.findRequiredView(source, 2131231637, "field 'tvLessonAddress'");
-    target.tvLessonAddress = finder.castView(view, 2131231637, "field 'tvLessonAddress'");
-    view = finder.findRequiredView(source, 2131231640, "field 'tvLessonPhone'");
-    target.tvLessonPhone = finder.castView(view, 2131231640, "field 'tvLessonPhone'");
+    view = finder.findRequiredView(source, 2131231757, "field 'mTvTitleText'");
+    target.mTvTitleText = finder.castView(view, 2131231757, "field 'mTvTitleText'");
+    view = finder.findRequiredView(source, 2131231136, "field 'mLlCommonLayout'");
+    target.mLlCommonLayout = finder.castView(view, 2131231136, "field 'mLlCommonLayout'");
+    view = finder.findRequiredView(source, 2131231691, "field 'tvResult'");
+    target.tvResult = finder.castView(view, 2131231691, "field 'tvResult'");
+    view = finder.findRequiredView(source, 2131231676, "field 'tvOrderId'");
+    target.tvOrderId = finder.castView(view, 2131231676, "field 'tvOrderId'");
+    view = finder.findRequiredView(source, 2131231642, "field 'tvLessonName'");
+    target.tvLessonName = finder.castView(view, 2131231642, "field 'tvLessonName'");
+    view = finder.findRequiredView(source, 2131231565, "field 'tvClassroomName'");
+    target.tvClassroomName = finder.castView(view, 2131231565, "field 'tvClassroomName'");
+    view = finder.findRequiredView(source, 2131231644, "field 'tvLessonTeacher'");
+    target.tvLessonTeacher = finder.castView(view, 2131231644, "field 'tvLessonTeacher'");
+    view = finder.findRequiredView(source, 2131231645, "field 'tvLessonTime'");
+    target.tvLessonTime = finder.castView(view, 2131231645, "field 'tvLessonTime'");
+    view = finder.findRequiredView(source, 2131231641, "field 'tvLessonAttention'");
+    target.tvLessonAttention = finder.castView(view, 2131231641, "field 'tvLessonAttention'");
+    view = finder.findRequiredView(source, 2131231640, "field 'tvLessonAddress'");
+    target.tvLessonAddress = finder.castView(view, 2131231640, "field 'tvLessonAddress'");
+    view = finder.findRequiredView(source, 2131231643, "field 'tvLessonPhone'");
+    target.tvLessonPhone = finder.castView(view, 2131231643, "field 'tvLessonPhone'");
     view = finder.findRequiredView(source, 2131230818, "field 'btnReturn' and method 'onViewClicked'");
     target.btnReturn = finder.castView(view, 2131230818, "field 'btnReturn'");
     unbinder.view2131230818 = view;
@@ -55,8 +55,8 @@ public class LessonAppointmentResultActivity$$ViewBinder<T extends LessonAppoint
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231150, "field 'mLayout'");
-    target.mLayout = finder.castView(view, 2131231150, "field 'mLayout'");
+    view = finder.findRequiredView(source, 2131231153, "field 'mLayout'");
+    target.mLayout = finder.castView(view, 2131231153, "field 'mLayout'");
     return unbinder;
   }
 
@@ -67,7 +67,7 @@ public class LessonAppointmentResultActivity$$ViewBinder<T extends LessonAppoint
   protected static class InnerUnbinder<T extends LessonAppointmentResultActivity> implements Unbinder {
     private T target;
 
-    View view2131231199;
+    View view2131231202;
 
     View view2131230818;
 
@@ -83,7 +83,7 @@ public class LessonAppointmentResultActivity$$ViewBinder<T extends LessonAppoint
     }
 
     protected void unbind(T target) {
-      view2131231199.setOnClickListener(null);
+      view2131231202.setOnClickListener(null);
       target.mLlTitleBack = null;
       target.mTvTitleText = null;
       target.mLlCommonLayout = null;

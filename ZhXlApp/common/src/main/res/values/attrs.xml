@@ -5,6 +5,7 @@
         <attr name="retryResource" format="reference" />
         <attr name="loadingResource" format="reference" />
     </declare-styleable>
+
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color" />
         <attr name="pstsUnderlineColor" format="color" />

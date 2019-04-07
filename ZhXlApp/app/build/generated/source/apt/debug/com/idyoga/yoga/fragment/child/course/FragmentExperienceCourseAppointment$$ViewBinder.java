@@ -14,10 +14,10 @@ public class FragmentExperienceCourseAppointment$$ViewBinder<T extends FragmentE
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231382, "field 'mLvCourseList'");
-    target.mLvCourseList = finder.castView(view, 2131231382, "field 'mLvCourseList'");
-    view = finder.findRequiredView(source, 2131231468, "field 'mRefreshLayout'");
-    target.mRefreshLayout = finder.castView(view, 2131231468, "field 'mRefreshLayout'");
+    view = finder.findRequiredView(source, 2131231385, "field 'mLvCourseList'");
+    target.mLvCourseList = finder.castView(view, 2131231385, "field 'mLvCourseList'");
+    view = finder.findRequiredView(source, 2131231471, "field 'mRefreshLayout'");
+    target.mRefreshLayout = finder.castView(view, 2131231471, "field 'mRefreshLayout'");
     return unbinder;
   }
 

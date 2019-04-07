@@ -15,18 +15,18 @@ public class MineMakeInfoActivity$$ViewBinder<T extends MineMakeInfoActivity> im
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231001, "field 'mIvBack' and method 'onViewClicked'");
-    target.mIvBack = finder.castView(view, 2131231001, "field 'mIvBack'");
-    unbinder.view2131231001 = view;
+    view = finder.findRequiredView(source, 2131231004, "field 'mIvBack' and method 'onViewClicked'");
+    target.mIvBack = finder.castView(view, 2131231004, "field 'mIvBack'");
+    unbinder.view2131231004 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231086, "field 'mIvUserHp' and method 'onViewClicked'");
-    target.mIvUserHp = finder.castView(view, 2131231086, "field 'mIvUserHp'");
-    unbinder.view2131231086 = view;
+    view = finder.findRequiredView(source, 2131231089, "field 'mIvUserHp' and method 'onViewClicked'");
+    target.mIvUserHp = finder.castView(view, 2131231089, "field 'mIvUserHp'");
+    unbinder.view2131231089 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,9 +53,9 @@ public class MineMakeInfoActivity$$ViewBinder<T extends MineMakeInfoActivity> im
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231523, "field 'mTvAddress' and method 'onViewClicked'");
-    target.mTvAddress = finder.castView(view, 2131231523, "field 'mTvAddress'");
-    unbinder.view2131231523 = view;
+    view = finder.findRequiredView(source, 2131231526, "field 'mTvAddress' and method 'onViewClicked'");
+    target.mTvAddress = finder.castView(view, 2131231526, "field 'mTvAddress'");
+    unbinder.view2131231526 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -71,9 +71,9 @@ public class MineMakeInfoActivity$$ViewBinder<T extends MineMakeInfoActivity> im
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231762, "field 'mTvUploadHp' and method 'onViewClicked'");
-    target.mTvUploadHp = finder.castView(view, 2131231762, "field 'mTvUploadHp'");
-    unbinder.view2131231762 = view;
+    view = finder.findRequiredView(source, 2131231765, "field 'mTvUploadHp' and method 'onViewClicked'");
+    target.mTvUploadHp = finder.castView(view, 2131231765, "field 'mTvUploadHp'");
+    unbinder.view2131231765 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -90,19 +90,19 @@ public class MineMakeInfoActivity$$ViewBinder<T extends MineMakeInfoActivity> im
   protected static class InnerUnbinder<T extends MineMakeInfoActivity> implements Unbinder {
     private T target;
 
-    View view2131231001;
+    View view2131231004;
 
-    View view2131231086;
+    View view2131231089;
 
     View view2131230843;
 
     View view2131230844;
 
-    View view2131231523;
+    View view2131231526;
 
     View view2131230820;
 
-    View view2131231762;
+    View view2131231765;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -116,20 +116,20 @@ public class MineMakeInfoActivity$$ViewBinder<T extends MineMakeInfoActivity> im
     }
 
     protected void unbind(T target) {
-      view2131231001.setOnClickListener(null);
+      view2131231004.setOnClickListener(null);
       target.mIvBack = null;
-      view2131231086.setOnClickListener(null);
+      view2131231089.setOnClickListener(null);
       target.mIvUserHp = null;
       target.mEtName = null;
       view2131230843.setOnClickListener(null);
       target.mCbSexBox = null;
       view2131230844.setOnClickListener(null);
       target.mCbSexGirl = null;
-      view2131231523.setOnClickListener(null);
+      view2131231526.setOnClickListener(null);
       target.mTvAddress = null;
       view2131230820.setOnClickListener(null);
       target.mBtnSubmit = null;
-      view2131231762.setOnClickListener(null);
+      view2131231765.setOnClickListener(null);
       target.mTvUploadHp = null;
     }
   }

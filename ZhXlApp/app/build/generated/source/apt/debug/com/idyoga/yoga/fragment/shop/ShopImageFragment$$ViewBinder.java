@@ -14,8 +14,8 @@ public class ShopImageFragment$$ViewBinder<T extends ShopImageFragment> implemen
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231387, "field 'mRlvImages'");
-    target.mRlvImages = finder.castView(view, 2131231387, "field 'mRlvImages'");
+    view = finder.findRequiredView(source, 2131231390, "field 'mRlvImages'");
+    target.mRlvImages = finder.castView(view, 2131231390, "field 'mRlvImages'");
     return unbinder;
   }
 

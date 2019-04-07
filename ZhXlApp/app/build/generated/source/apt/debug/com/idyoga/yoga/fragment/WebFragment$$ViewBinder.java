@@ -14,8 +14,8 @@ public class WebFragment$$ViewBinder<T extends WebFragment> implements ViewBinde
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231207, "field 'mLlWebLayout'");
-    target.mLlWebLayout = finder.castView(view, 2131231207, "field 'mLlWebLayout'");
+    view = finder.findRequiredView(source, 2131231210, "field 'mLlWebLayout'");
+    target.mLlWebLayout = finder.castView(view, 2131231210, "field 'mLlWebLayout'");
     return unbinder;
   }
 

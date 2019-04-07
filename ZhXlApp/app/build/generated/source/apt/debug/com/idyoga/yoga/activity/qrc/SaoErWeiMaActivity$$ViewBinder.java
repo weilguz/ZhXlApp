@@ -14,20 +14,20 @@ public class SaoErWeiMaActivity$$ViewBinder<T extends SaoErWeiMaActivity> implem
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131230957, "field 'mFlMyContainer'");
-    target.mFlMyContainer = finder.castView(view, 2131230957, "field 'mFlMyContainer'");
+    view = finder.findRequiredView(source, 2131230958, "field 'mFlMyContainer'");
+    target.mFlMyContainer = finder.castView(view, 2131230958, "field 'mFlMyContainer'");
     view = finder.findRequiredView(source, 2131230815, "field 'mBtnMainBack'");
     target.mBtnMainBack = finder.castView(view, 2131230815, "field 'mBtnMainBack'");
-    view = finder.findRequiredView(source, 2131231200, "field 'mLinearLayout'");
-    target.mLinearLayout = finder.castView(view, 2131231200, "field 'mLinearLayout'");
-    view = finder.findRequiredView(source, 2131231648, "field 'mTvMainTitle'");
-    target.mTvMainTitle = finder.castView(view, 2131231648, "field 'mTvMainTitle'");
-    view = finder.findRequiredView(source, 2131231647, "field 'mTvMainRight'");
-    target.mTvMainRight = finder.castView(view, 2131231647, "field 'mTvMainRight'");
-    view = finder.findRequiredView(source, 2131231436, "field 'mSecondButton1'");
-    target.mSecondButton1 = finder.castView(view, 2131231436, "field 'mSecondButton1'");
-    view = finder.findRequiredView(source, 2131231150, "field 'mLlLayout'");
-    target.mLlLayout = finder.castView(view, 2131231150, "field 'mLlLayout'");
+    view = finder.findRequiredView(source, 2131231203, "field 'mLinearLayout'");
+    target.mLinearLayout = finder.castView(view, 2131231203, "field 'mLinearLayout'");
+    view = finder.findRequiredView(source, 2131231651, "field 'mTvMainTitle'");
+    target.mTvMainTitle = finder.castView(view, 2131231651, "field 'mTvMainTitle'");
+    view = finder.findRequiredView(source, 2131231650, "field 'mTvMainRight'");
+    target.mTvMainRight = finder.castView(view, 2131231650, "field 'mTvMainRight'");
+    view = finder.findRequiredView(source, 2131231439, "field 'mSecondButton1'");
+    target.mSecondButton1 = finder.castView(view, 2131231439, "field 'mSecondButton1'");
+    view = finder.findRequiredView(source, 2131231153, "field 'mLlLayout'");
+    target.mLlLayout = finder.castView(view, 2131231153, "field 'mLlLayout'");
     return unbinder;
   }
 

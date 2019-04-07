@@ -15,17 +15,17 @@ public class ActivaSuccessActivity$$ViewBinder<T extends ActivaSuccessActivity> 
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231001, "field 'ivBack' and method 'onViewClicked'");
-    target.ivBack = finder.castView(view, 2131231001, "field 'ivBack'");
-    unbinder.view2131231001 = view;
+    view = finder.findRequiredView(source, 2131231004, "field 'ivBack' and method 'onViewClicked'");
+    target.ivBack = finder.castView(view, 2131231004, "field 'ivBack'");
+    unbinder.view2131231004 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231372, "field 'rlTitle'");
-    target.rlTitle = finder.castView(view, 2131231372, "field 'rlTitle'");
+    view = finder.findRequiredView(source, 2131231375, "field 'rlTitle'");
+    target.rlTitle = finder.castView(view, 2131231375, "field 'rlTitle'");
     view = finder.findRequiredView(source, 2131230819, "field 'btnSee' and method 'onViewClicked'");
     target.btnSee = finder.castView(view, 2131230819, "field 'btnSee'");
     unbinder.view2131230819 = view;
@@ -44,8 +44,8 @@ public class ActivaSuccessActivity$$ViewBinder<T extends ActivaSuccessActivity> 
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231002, "field 'ivBackYellow'");
-    target.ivBackYellow = finder.castView(view, 2131231002, "field 'ivBackYellow'");
+    view = finder.findRequiredView(source, 2131231005, "field 'ivBackYellow'");
+    target.ivBackYellow = finder.castView(view, 2131231005, "field 'ivBackYellow'");
     return unbinder;
   }
 
@@ -56,7 +56,7 @@ public class ActivaSuccessActivity$$ViewBinder<T extends ActivaSuccessActivity> 
   protected static class InnerUnbinder<T extends ActivaSuccessActivity> implements Unbinder {
     private T target;
 
-    View view2131231001;
+    View view2131231004;
 
     View view2131230819;
 
@@ -74,7 +74,7 @@ public class ActivaSuccessActivity$$ViewBinder<T extends ActivaSuccessActivity> 
     }
 
     protected void unbind(T target) {
-      view2131231001.setOnClickListener(null);
+      view2131231004.setOnClickListener(null);
       target.ivBack = null;
       target.rlTitle = null;
       view2131230819.setOnClickListener(null);

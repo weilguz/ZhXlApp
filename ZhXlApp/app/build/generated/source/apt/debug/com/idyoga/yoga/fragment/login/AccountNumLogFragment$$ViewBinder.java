@@ -17,15 +17,15 @@ public class AccountNumLogFragment$$ViewBinder<T extends AccountNumLogFragment> 
     View view;
     view = finder.findRequiredView(source, 2131230933, "field 'etInputPhone'");
     target.etInputPhone = finder.castView(view, 2131230933, "field 'etInputPhone'");
-    view = finder.findRequiredView(source, 2131231039, "field 'ivIsShowPwd'");
-    target.ivIsShowPwd = finder.castView(view, 2131231039, "field 'ivIsShowPwd'");
+    view = finder.findRequiredView(source, 2131231042, "field 'ivIsShowPwd'");
+    target.ivIsShowPwd = finder.castView(view, 2131231042, "field 'ivIsShowPwd'");
     view = finder.findRequiredView(source, 2131230934, "field 'etInputPwd'");
     target.etInputPwd = finder.castView(view, 2131230934, "field 'etInputPwd'");
     view = finder.findRequiredView(source, 2131230810, "field 'btnForgetPrw'");
     target.btnForgetPrw = finder.castView(view, 2131230810, "field 'btnForgetPrw'");
-    view = finder.findRequiredView(source, 2131231622, "field 'tvForgetPwd' and method 'onViewClicked'");
-    target.tvForgetPwd = finder.castView(view, 2131231622, "field 'tvForgetPwd'");
-    unbinder.view2131231622 = view;
+    view = finder.findRequiredView(source, 2131231625, "field 'tvForgetPwd' and method 'onViewClicked'");
+    target.tvForgetPwd = finder.castView(view, 2131231625, "field 'tvForgetPwd'");
+    unbinder.view2131231625 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -41,18 +41,18 @@ public class AccountNumLogFragment$$ViewBinder<T extends AccountNumLogFragment> 
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231095, "field 'ivWxLogin' and method 'onViewClicked'");
-    target.ivWxLogin = finder.castView(view, 2131231095, "field 'ivWxLogin'");
-    unbinder.view2131231095 = view;
+    view = finder.findRequiredView(source, 2131231098, "field 'ivWxLogin' and method 'onViewClicked'");
+    target.ivWxLogin = finder.castView(view, 2131231098, "field 'ivWxLogin'");
+    unbinder.view2131231098 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    view = finder.findRequiredView(source, 2131231366, "field 'rlShowPwd' and method 'onViewClicked'");
-    target.rlShowPwd = finder.castView(view, 2131231366, "field 'rlShowPwd'");
-    unbinder.view2131231366 = view;
+    view = finder.findRequiredView(source, 2131231369, "field 'rlShowPwd' and method 'onViewClicked'");
+    target.rlShowPwd = finder.castView(view, 2131231369, "field 'rlShowPwd'");
+    unbinder.view2131231369 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -69,13 +69,13 @@ public class AccountNumLogFragment$$ViewBinder<T extends AccountNumLogFragment> 
   protected static class InnerUnbinder<T extends AccountNumLogFragment> implements Unbinder {
     private T target;
 
-    View view2131231622;
+    View view2131231625;
 
     View view2131230813;
 
-    View view2131231095;
+    View view2131231098;
 
-    View view2131231366;
+    View view2131231369;
 
     protected InnerUnbinder(T target) {
       this.target = target;
@@ -93,13 +93,13 @@ public class AccountNumLogFragment$$ViewBinder<T extends AccountNumLogFragment> 
       target.ivIsShowPwd = null;
       target.etInputPwd = null;
       target.btnForgetPrw = null;
-      view2131231622.setOnClickListener(null);
+      view2131231625.setOnClickListener(null);
       target.tvForgetPwd = null;
       view2131230813.setOnClickListener(null);
       target.btnLogin = null;
-      view2131231095.setOnClickListener(null);
+      view2131231098.setOnClickListener(null);
       target.ivWxLogin = null;
-      view2131231366.setOnClickListener(null);
+      view2131231369.setOnClickListener(null);
       target.rlShowPwd = null;
     }
   }

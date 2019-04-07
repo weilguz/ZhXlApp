@@ -14,14 +14,14 @@ public class CommonDialog$ViewHolder$$ViewBinder<T extends CommonDialog.ViewHold
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231751, "field 'mTvTitle'");
-    target.mTvTitle = finder.castView(view, 2131231751, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131231661, "field 'mTvMsg'");
-    target.mTvMsg = finder.castView(view, 2131231661, "field 'mTvMsg'");
-    view = finder.findRequiredView(source, 2131231730, "field 'mTvSure'");
-    target.mTvSure = finder.castView(view, 2131231730, "field 'mTvSure'");
-    view = finder.findRequiredView(source, 2131231545, "field 'mTvCancel'");
-    target.mTvCancel = finder.castView(view, 2131231545, "field 'mTvCancel'");
+    view = finder.findRequiredView(source, 2131231754, "field 'mTvTitle'");
+    target.mTvTitle = finder.castView(view, 2131231754, "field 'mTvTitle'");
+    view = finder.findRequiredView(source, 2131231664, "field 'mTvMsg'");
+    target.mTvMsg = finder.castView(view, 2131231664, "field 'mTvMsg'");
+    view = finder.findRequiredView(source, 2131231733, "field 'mTvSure'");
+    target.mTvSure = finder.castView(view, 2131231733, "field 'mTvSure'");
+    view = finder.findRequiredView(source, 2131231548, "field 'mTvCancel'");
+    target.mTvCancel = finder.castView(view, 2131231548, "field 'mTvCancel'");
     return unbinder;
   }
 

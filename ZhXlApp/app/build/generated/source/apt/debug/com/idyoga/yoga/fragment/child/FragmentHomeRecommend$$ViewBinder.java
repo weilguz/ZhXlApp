@@ -14,12 +14,12 @@ public class FragmentHomeRecommend$$ViewBinder<T extends FragmentHomeRecommend> 
   public Unbinder bind(final Finder finder, final T target, Object source) {
     InnerUnbinder unbinder = createUnbinder(target);
     View view;
-    view = finder.findRequiredView(source, 2131231467, "field 'mSrlRefresh'");
-    target.mSrlRefresh = finder.castView(view, 2131231467, "field 'mSrlRefresh'");
-    view = finder.findRequiredView(source, 2131231407, "field 'mRvList'");
-    target.mRvList = finder.castView(view, 2131231407, "field 'mRvList'");
-    view = finder.findRequiredView(source, 2131231102, "field 'mLayoutF'");
-    target.mLayoutF = finder.castView(view, 2131231102, "field 'mLayoutF'");
+    view = finder.findRequiredView(source, 2131231470, "field 'mSrlRefresh'");
+    target.mSrlRefresh = finder.castView(view, 2131231470, "field 'mSrlRefresh'");
+    view = finder.findRequiredView(source, 2131231410, "field 'mRvList'");
+    target.mRvList = finder.castView(view, 2131231410, "field 'mRvList'");
+    view = finder.findRequiredView(source, 2131231105, "field 'mLayoutF'");
+    target.mLayoutF = finder.castView(view, 2131231105, "field 'mLayoutF'");
     return unbinder;
   }
 
